@@ -1,5 +1,5 @@
 
-public class ia {
+/*public class ia {
 	minimax(in game board, in int depth, in int max_depth,
 	        out score chosen_score, out score chosen_move)
 	begin 
@@ -25,4 +25,4 @@ public class ia {
 	        endif
 	    endif
 	end.
-}
+}*/

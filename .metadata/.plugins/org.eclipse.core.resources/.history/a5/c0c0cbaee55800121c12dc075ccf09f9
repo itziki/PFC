@@ -1,0 +1,12 @@
+package parchis;
+
+import javax.swing.JApplet;
+
+public class Tablero extends JApplet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

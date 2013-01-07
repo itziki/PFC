@@ -1,0 +1,14 @@
+package parchis;
+
+public class Casillero {
+	private Casilla[] casillas; /*numero total de casillas del tablero*/
+
+	public Casilla[] getCasillas() {
+		return casillas;
+	}
+
+	public void setCasillas(Casilla[] casillas) {
+		this.casillas = casillas;
+	}
+
+}
