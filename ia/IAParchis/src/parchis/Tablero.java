@@ -5,22 +5,7 @@ import javax.swing.JApplet;
 public class Tablero extends JApplet {
 	private Casillero casillero;
 	private Jugador jugador;
-	/**
-	 * REGLAS DEL ALGORITMO Y FUNCION DE UTILIDAD
-	 * a) Si con el movimiento...
-	 * 	1- Alcanzamos un seguro: +10
-	 * 	2- No alcanzamos un seguro se comparan la posición final con la que tiene ahora
-	 * 		calculamos para cada posición (actual y posible final) el número de fichas que 
-	 * 		tenemos tanto por delante como por detrás en un rango de 7 casillas (el máximo que se puede
-	 * 		alcanzar). Seguido se calcula esta función
-	 * 			rating = 3·(incremento_piezas_atacadas) + 9·(reducción_piezas_atacantes)
-	 * 						las que tenemos delante				las que tenemos detras
-	 * 	3- Comemos pieza enemiga: +30
-	 * b) Si la ficha está en un seguro válido (casillas de inicio de otro color no): -5
-	 * 	Se calcula el nº de fichas por detrás de ella hasta 7 casillas. Por cada una: -9
-	 * 	Si está compartiendo el seguro con una ficha enemiga: -6
-	 * c) Penalización por el camino recorrido: rating = 1-recorrido/10
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	public Casillero getCasillero() {
 		return casillero;

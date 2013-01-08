@@ -4,3 +4,6 @@
 1357574656498	Encapsulate field 'casillas'
 1357575418756	Encapsulate field 'casillero'
 1357575424479	Encapsulate field 'jugador'
+1357668524579	Encapsulate field 'colorPiezas'
+1357668993697	Encapsulate field 'piezas'
+1357669891972	Encapsulate field 'pieza'

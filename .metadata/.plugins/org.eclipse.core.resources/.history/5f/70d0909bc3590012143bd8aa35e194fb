@@ -21,7 +21,6 @@ public class Jugador {
 	
 	public Pieza selectPieza(Casillero casillero, int dado){
 		int rating = 0;
-		Pieza piezaElegida = null;
 		Casilla[] casillas = casillero.getCasillas();
 		Pieza[] piezas = casillero.getPiezas();
 		/*regla 1*/
@@ -66,7 +65,7 @@ public class Jugador {
 			}
 		}
 			
-		return piezaElegida;		
+		return null;		
 	}
 	public int getColorPiezas() {
 		return colorPiezas;

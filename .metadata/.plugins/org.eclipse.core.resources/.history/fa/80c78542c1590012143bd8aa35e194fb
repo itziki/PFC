@@ -20,53 +20,13 @@ public class Jugador {
 	private int colorPiezas;/*0- amarillo; 1-azul; 2-rojo; 3-verde*/
 	
 	public Pieza selectPieza(Casillero casillero, int dado){
-		int rating = 0;
-		Pieza piezaElegida = null;
 		Casilla[] casillas = casillero.getCasillas();
 		Pieza[] piezas = casillero.getPiezas();
-		/*regla 1*/
-		for (int i = 0; i < piezas.length; i= i+1)
+		for (int i = 0; i < casillas.length; i= i+1)
 		{
-			if (piezas[i].getColor() == this.colorPiezas)
-			{
-				int casillaPieza = piezas[i].getCasilla();
-				int casillasPorDelante = casillaPieza + 7;
-				int casillasPorDetras = casillaPieza - 7;
-				int reduccionPiezasAtacantes = 0;
-				int incrementoPiezasAtacadas = 0;
-				
-				if (casillas[casillaPieza + dado].isEsSegura())
-				{
-					rating += 10;
-				}
-				else if (casillas[casillaPieza + dado].getPieza().getColor() != this.colorPiezas)
-				{
-					rating += 30;
-				}
-				else
-				{
-					for (int j = casillaPieza; j < casillasPorDelante; j++)
-					{
-						Pieza otraPieza = casillas[j].getPieza();
-						if (otraPieza.getColor() != this.colorPiezas)
-						{
-							reduccionPiezasAtacantes++;
-						}
-					}
-					for (int j = casillasPorDetras; j > casillaPieza; j++)
-					{
-						Pieza otraPieza = casillas[j].getPieza();
-						if (otraPieza.getColor() != this.colorPiezas)
-						{
-							incrementoPiezasAtacadas++;
-						}
-					}
-					rating += (3 * incrementoPiezasAtacadas) + (9 * reduccionPiezasAtacantes);
-				}
-			}
 		}
 			
-		return piezaElegida;		
+		return null;		
 	}
 	public int getColorPiezas() {
 		return colorPiezas;

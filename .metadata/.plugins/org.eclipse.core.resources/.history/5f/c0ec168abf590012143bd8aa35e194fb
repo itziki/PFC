@@ -2,7 +2,6 @@ package parchis;
 
 public class Casillero {
 	private Casilla[] casillas; /*numero total de casillas del tablero*/
-	private Pieza[] piezas;
 	/*
 	 * 0 - Casa amarilla
 	 * 1 - Casa azul
@@ -20,14 +19,6 @@ public class Casillero {
 
 	public void setCasillas(Casilla[] casillas) {
 		this.casillas = casillas;
-	}
-
-	public Pieza[] getPiezas() {
-		return piezas;
-	}
-
-	public void setPiezas(Pieza[] piezas) {
-		this.piezas = piezas;
 	}
 
 }
