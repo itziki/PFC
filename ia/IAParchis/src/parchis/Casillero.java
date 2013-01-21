@@ -29,5 +29,24 @@ public class Casillero {
 	public void setPiezas(Pieza[] piezas) {
 		this.piezas = piezas;
 	}
+	
+	public void iniciarCasillero()
+	{
+		//casillas de salida
+		for (int i = 0; i < 4; i++)
+		{			
+			casillas[i] = new Casilla(true);
+		}
+		//
+		for (int i = 4; i < 72; i++)
+		{
+			casillas[i] = new Casilla(false);
+		}
+		//pasillo final
+		for (int i = 72; i < 104; i++)
+		{			
+			casillas[i] = new Casilla(true);
+		}
+	}
 
 }

@@ -3,14 +3,14 @@ package parchis;
 /**
  * REGLAS DEL ALGORITMO Y FUNCION DE UTILIDAD
  * a) Si con el movimiento...
- * 	1- Alcanzamos un seguro: +10
- * 	2- No alcanzamos un seguro se comparan la posición final con la que tiene ahora
+ * 	 1- Alcanzamos un seguro: +10
+ *   2- No alcanzamos un seguro se comparan la posición final con la que tiene ahora
  * 		calculamos para cada posición (actual y posible final) el número de fichas que 
  * 		tenemos tanto por delante como por detrás en un rango de 7 casillas (el máximo que se puede
  * 		alcanzar). Seguido se calcula esta función
  * 			rating = 3·(incremento_piezas_atacadas) + 9·(reducción_piezas_atacantes)
  * 						las que tenemos delante				las que tenemos detras
- * 	3- Comemos pieza enemiga: +30
+ * 	 3- Comemos pieza enemiga: +30
  * b) Si la ficha está en un seguro válido (casillas de inicio de otro color no): -5
  * 	Se calcula el nº de fichas por detrás de ella hasta 7 casillas. Por cada una: -9
  * 	Si está compartiendo el seguro con una ficha enemiga: -6
@@ -24,7 +24,8 @@ public class Jugador {
 		Pieza piezaElegida = null;
 		Casilla[] casillas = casillero.getCasillas();
 		Pieza[] piezas = casillero.getPiezas();
-		/*regla 1*/
+		Pieza[] piezasEnCasilla = null;
+		/*regla a*/
 		for (int i = 0; i < piezas.length; i= i+1)
 		{
 			if (piezas[i].getColor() == this.colorPiezas)
@@ -34,17 +35,21 @@ public class Jugador {
 				int casillasPorDetras = casillaPieza - 7;
 				int reduccionPiezasAtacantes = 0;
 				int incrementoPiezasAtacadas = 0;
-				
+				piezasEnCasilla = casillas[casillaPieza].getPiezas();
+				/*regla a.1: alcanzamos un seguro*/
 				if (casillas[casillaPieza + dado].isEsSegura())
 				{
 					rating += 10;
 				}
+				/*regla a.3: comemos pieza enemiga*/
 				else if (casillas[casillaPieza + dado].getPieza().getColor() != this.colorPiezas)
 				{
 					rating += 30;
 				}
+				/*regla a.2*/
 				else
 				{
+					/*posición inicial*/
 					for (int j = casillaPieza; j < casillasPorDelante; j++)
 					{
 						Pieza otraPieza = casillas[j].getPieza();
@@ -53,7 +58,7 @@ public class Jugador {
 							reduccionPiezasAtacantes++;
 						}
 					}
-					for (int j = casillasPorDetras; j > casillaPieza; j++)
+					for (int j = casillaPieza; j < casillasPorDetras; j--)
 					{
 						Pieza otraPieza = casillas[j].getPieza();
 						if (otraPieza.getColor() != this.colorPiezas)
@@ -61,8 +66,47 @@ public class Jugador {
 							incrementoPiezasAtacadas++;
 						}
 					}
+					/*posicion final*/
+					for (int j = casillasPorDelante; j < casillasPorDelante + 7; j++)
+					{
+						Pieza otraPieza = casillas[j].getPieza();
+						if (otraPieza.getColor() != this.colorPiezas)
+						{
+							reduccionPiezasAtacantes++;
+						}
+					}
+					for (int j = casillasPorDelante; j < casillaPieza; j--)
+					{
+						Pieza otraPieza = casillas[j].getPieza();
+						if (otraPieza.getColor() != this.colorPiezas)
+						{
+							incrementoPiezasAtacadas++;
+						}
+					}
+					/*función*/
 					rating += (3 * incrementoPiezasAtacadas) + (9 * reduccionPiezasAtacantes);
 				}
+				/*regla b*/
+				if(casillas[casillaPieza].isEsSegura())
+				{
+					rating -= 5;
+					for(int j = casillaPieza; j < casillasPorDetras; j--)
+					{
+						Pieza otraPieza = casillas[j].getPieza();
+						if (otraPieza.getColor()!= this.colorPiezas)
+						{
+							rating -= 9;
+						}
+					}
+					for(int k = 0; k < piezas.length; k++)
+					{
+						if (piezas[k].getCasilla() == casillaPieza)
+							if (piezas[k].getColor() != this.colorPiezas)
+								rating -= 6;
+					}
+				}
+				/*regla c: 1-recorrido/10*/
+				rating -= (1-piezas[i].getRecorrido()/10);
 			}
 		}
 			
