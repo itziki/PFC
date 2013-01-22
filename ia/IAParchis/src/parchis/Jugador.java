@@ -42,7 +42,7 @@ public class Jugador {
 					rating += 10;
 				}
 				/*regla a.3: comemos pieza enemiga*/
-				else if (casillas[casillaPieza + dado].getPieza().getColor() != this.colorPiezas)
+				else if (casillas[casillaPieza + dado].miPieza(colorPiezas).getColor() != colorPiezas)
 				{
 					rating += 30;
 				}
@@ -52,7 +52,7 @@ public class Jugador {
 					/*posición inicial*/
 					for (int j = casillaPieza; j < casillasPorDelante; j++)
 					{
-						Pieza otraPieza = casillas[j].getPieza();
+						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							reduccionPiezasAtacantes++;
@@ -60,7 +60,7 @@ public class Jugador {
 					}
 					for (int j = casillaPieza; j < casillasPorDetras; j--)
 					{
-						Pieza otraPieza = casillas[j].getPieza();
+						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							incrementoPiezasAtacadas++;
@@ -69,7 +69,7 @@ public class Jugador {
 					/*posicion final*/
 					for (int j = casillasPorDelante; j < casillasPorDelante + 7; j++)
 					{
-						Pieza otraPieza = casillas[j].getPieza();
+						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							reduccionPiezasAtacantes++;
@@ -77,7 +77,7 @@ public class Jugador {
 					}
 					for (int j = casillasPorDelante; j < casillaPieza; j--)
 					{
-						Pieza otraPieza = casillas[j].getPieza();
+						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							incrementoPiezasAtacadas++;
@@ -87,12 +87,12 @@ public class Jugador {
 					rating += (3 * incrementoPiezasAtacadas) + (9 * reduccionPiezasAtacantes);
 				}
 				/*regla b*/
-				if(casillas[casillaPieza].isEsSegura())
+				if((casillas[casillaPieza].isEsSegura()) || (casillero.esMiSeguro(colorPiezas, casillaPieza)))
 				{
 					rating -= 5;
 					for(int j = casillaPieza; j < casillasPorDetras; j--)
 					{
-						Pieza otraPieza = casillas[j].getPieza();
+						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
 						if (otraPieza.getColor()!= this.colorPiezas)
 						{
 							rating -= 9;

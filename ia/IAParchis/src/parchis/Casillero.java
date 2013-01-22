@@ -48,5 +48,30 @@ public class Casillero {
 			casillas[i] = new Casilla(true);
 		}
 	}
-
+	
+	/*0 - Casa amarilla
+	 * 1 - Casa azul
+	 * 2 - Casa roja
+	 * 3 - Casa verde
+	 */
+	public boolean esMiSeguro(int color, int casilla)
+	{
+		boolean result = false;
+		switch (color)
+		{
+			case 0: if (casilla == 0)
+				result = true;
+			break;
+			case 1: if (casilla == 1)
+				result = true;
+			break;
+			case 2: if (casilla == 2)
+				result = true;
+			break;
+			case 3: if (casilla == 3)
+				result = true;
+			break;
+		}
+		return result;
+	}
 }
