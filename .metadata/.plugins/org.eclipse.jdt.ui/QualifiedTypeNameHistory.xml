@@ -14,4 +14,9 @@
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="parchis.ImageLabel"/>
+<fullyQualifiedTypeName name="parchis.Partida"/>
+<fullyQualifiedTypeName name="parchis.Pieza"/>
+<fullyQualifiedTypeName name="parchis.Tablero"/>
+<fullyQualifiedTypeName name="parchis.Jugador"/>
+<fullyQualifiedTypeName name="es.deusto.ingenieria.aike.formulation.State"/>
 </qualifiedTypeNameHistroy>

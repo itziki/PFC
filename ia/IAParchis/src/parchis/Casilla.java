@@ -3,7 +3,7 @@ package parchis;
 public class Casilla {
 	private boolean esSegura; /*si la casilla es segura, es decir, si pueden comerse fichas o no*/
 	private int numeroFichas; /*fichas que hay en la casilla. Máximo 2*/
-	private Pieza[] piezas;
+	private Pieza[] piezas; /*piezas de esa casilla*/
 	
 	public Casilla (boolean esSegura)
 	{

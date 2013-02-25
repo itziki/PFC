@@ -1,18 +1,20 @@
 package parchis;
 
 public class Casillero {
-	private Casilla[] casillas; /*numero total de casillas del tablero*/
-	private Pieza[] piezas;
+	private Casilla[] casillas = new Casilla[104]; /*numero total de casillas del tablero*/
+	private Pieza[] piezas; /*todas las piezas del juego*/
 	/*
 	 * 0 - Casa amarilla
 	 * 1 - Casa azul
 	 * 2 - Casa roja
 	 * 3 - Casa verde
-	 * 4..71 - Tablero
+	 * 12..71 - Tablero
 	 * 72..79 - Pasillo amarillo
 	 * 80..87 - pasillo azul
 	 * 88..95 - pasillo rojo
-	 * 96..103 - pasillo verde*/
+	 * 96..103 - pasillo verde
+	 * además, las casillas seguras para todos son:
+	 * 4,5,6,7,8,9,10,11*/
 
 	public Casilla[] getCasillas() {
 		return casillas;
@@ -33,12 +35,12 @@ public class Casillero {
 	public void iniciarCasillero()
 	{
 		//casillas de salida
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 12; i++)
 		{			
 			casillas[i] = new Casilla(true);
 		}
 		//
-		for (int i = 4; i < 72; i++)
+		for (int i = 12; i < 72; i++)
 		{
 			casillas[i] = new Casilla(false);
 		}
@@ -73,5 +75,32 @@ public class Casillero {
 			break;
 		}
 		return result;
+	}
+	
+	
+	/*72..79 - Pasillo amarillo
+	 * 80..87 - pasillo azul
+	 * 88..95 - pasillo rojo
+	 * 96..103 - pasillo verde*/
+	public boolean piezaEnFinal(Pieza ficha)
+	{
+		boolean estaEnFinal = false;
+		int casilla = ficha.getCasilla();
+		switch(ficha.getColor())
+		{
+			case 0: if(casilla == 79)
+				estaEnFinal = true;
+				break;
+			case 1: if(casilla == 87)
+				estaEnFinal = true;
+				break;
+			case 2: if(casilla == 95)
+				estaEnFinal = true;
+				break;
+			case 3: if(casilla == 103)
+				estaEnFinal = true;
+				break;
+		}
+		return estaEnFinal;
 	}
 }

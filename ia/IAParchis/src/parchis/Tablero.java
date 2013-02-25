@@ -17,8 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Tablero extends JApplet {
-	private Casillero casillero;
-	private Jugador jugador;
+	private Casillero casillero = new Casillero();
+	private Jugador jugador[]; /*0- amarillo; 1-azul; 2-rojo; 3-verde*/
 	JPanel principal;
 	JPanel fichaPanel;
 	JFrame frame;
@@ -32,11 +32,16 @@ public class Tablero extends JApplet {
 	public void setCasillero(Casillero casillero) {
 		this.casillero = casillero;
 	}
-	public Jugador getJugador() {
+	public Jugador[] getJugador() {
 		return jugador;
 	}
-	public void setJugador(Jugador jugador) {
+	public void setJugador(Jugador[] jugador) {
 		this.jugador = jugador;
+	}
+	
+	public void iniciarTablero()
+	{
+		casillero.iniciarCasillero();
 	}
 	
 	public void init(){

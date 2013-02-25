@@ -4,3 +4,6 @@ http://www.adeideas.com/paquito/archives/156/MINIMAX.htm
 22/01/2013
 http://www.java2s.com/Code/JavaAPI/javax.swing/JLabelsetIconIconicon.htm
 http://www.java.net/node/661348
+
+25/02/2013
+http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe_AI.html
