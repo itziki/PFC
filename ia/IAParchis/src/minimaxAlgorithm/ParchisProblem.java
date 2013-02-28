@@ -1,7 +1,7 @@
 package minimaxAlgorithm;
 
-import es.deusto.ingenieria.aike.formulation.Problem;
-import es.deusto.ingenieria.aike.formulation.State;
+import formulation.Problem;
+import formulation.State;
 
 public class ParchisProblem extends Problem {
 
