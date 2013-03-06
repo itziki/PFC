@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=IAParchis/C:\/Program Files\/Java\/jre6\/lib\/rt.jar&lt;javax.swing(JApplet.class[JApplet" modifiers="33" timestamp="1314938019435"/>
-<typeInfo handle="=IAParchis/formulation.jar&lt;es.deusto.ingenieria.aike.formulation(Problem.class[Problem" modifiers="1057" timestamp="1328021786000"/>
-<typeInfo handle="=IAParchis/formulation.jar&lt;es.deusto.ingenieria.aike.formulation(Operator.class[Operator" modifiers="1057" timestamp="1328021786000"/>
+<typeInfo handle="=IAParchis/D:\/PFC\/ia\/IAParchis\/lib\/formulation.jar&lt;formulation(Action.class[Action" modifiers="1057" timestamp="1362073222716"/>
 </typeInfoHistroy>

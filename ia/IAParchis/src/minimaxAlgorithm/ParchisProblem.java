@@ -20,9 +20,9 @@ public class ParchisProblem extends Problem {
 		return false;
 	}
 	
-	public void solve(Minimax minimax)
-	{
+	//public void solve(Minimax minimax)
+	//{
 		
-	}
+	//}
 
 }

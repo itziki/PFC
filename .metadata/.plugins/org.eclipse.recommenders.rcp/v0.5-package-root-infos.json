@@ -7,58 +7,6 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "aaac316fd60b5ec179b0412111a6f68e273224ca",
-    "jarFileModificationDate": "2011-09-02T06:33:42.664+02:00",
-    "location": "C:\\Program Files\\Java\\jre6\\lib\\charsets.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "4ce9e976962b7c8126c0eed9ff2500c8e78ace4c",
-    "jarFileModificationDate": "2011-09-02T06:33:38.296+02:00",
-    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\dnsns.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "4838808e80df811cfb2bf7faf361b3cbc16f9f81",
-    "jarFileModificationDate": "2011-08-31T00:05:02+02:00",
-    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\dns_sd.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "483ea9030e14a40705b0c087efbcb2c2dcf8e66c",
-    "jarFileModificationDate": "2011-09-02T06:33:42.867+02:00",
-    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\localedata.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
     "jarFileFingerprint": "856be9c7554b0563360e1c2c278295bc5c964186",
     "jarFileModificationDate": "2011-09-02T06:33:38.328+02:00",
     "location": "C:\\Program Files\\Java\\jre6\\lib\\resources.jar",
@@ -91,6 +39,32 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "formulation",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "be754502b4835a2d5ee3aa1c9423e7dc227faa62",
+    "jarFileModificationDate": "2013-02-28T18:40:22.716+01:00",
+    "location": "D:\\PFC\\ia\\IAParchis\\lib\\formulation.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "minimax",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "a29e338a2555ca15014b5263adb55eecbdb54a87",
+    "jarFileModificationDate": "2013-02-28T19:57:44.252+01:00",
+    "location": "D:\\PFC\\ia\\IAParchis\\lib\\minimax.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -102,6 +76,84 @@
     "jarFileModificationDate": "2011-09-02T06:33:38.312+02:00",
     "location": "C:\\Program Files\\Java\\jre6\\lib\\jce.jar",
     "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "aaac316fd60b5ec179b0412111a6f68e273224ca",
+    "jarFileModificationDate": "2011-09-02T06:33:42.664+02:00",
+    "location": "C:\\Program Files\\Java\\jre6\\lib\\charsets.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "4ce9e976962b7c8126c0eed9ff2500c8e78ace4c",
+    "jarFileModificationDate": "2011-09-02T06:33:38.296+02:00",
+    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\dnsns.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "4838808e80df811cfb2bf7faf361b3cbc16f9f81",
+    "jarFileModificationDate": "2011-08-31T00:05:02+02:00",
+    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\dns_sd.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "formulation",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "a333ab85f977894575e28229840b564237fedf49",
+    "jarFileModificationDate": "2012-01-31T15:56:26+01:00",
+    "location": "C:\\Users\\Itziar\\Dropbox\\Mis cosas\\4º\\AIKE\\ejercicios\\nQueenSearch\\lib\\formulation.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "483ea9030e14a40705b0c087efbcb2c2dcf8e66c",
+    "jarFileModificationDate": "2011-09-02T06:33:42.867+02:00",
+    "location": "C:\\Program Files\\Java\\jre6\\lib\\ext\\localedata.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "search",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "c48e678c11f026aa33f4e418cd88d446def8b791",
+    "jarFileModificationDate": "2012-01-31T15:57:18+01:00",
+    "location": "C:\\Users\\Itziar\\Dropbox\\Mis cosas\\4º\\AIKE\\ejercicios\\nQueenSearch\\lib\\search.jar",
+    "javaRuntime": false
   },
   {
     "symbolicName": "jre",

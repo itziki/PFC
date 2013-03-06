@@ -5,7 +5,7 @@ import formulation.State;
 public class Node implements Comparable<Node> {
 	
 	private State state;
-	private String operator;
+	private String action;
 	private Node parent;
 	private int depth;
 	private double g;
@@ -16,14 +16,14 @@ public class Node implements Comparable<Node> {
 		this.state = state;
 	}
 
-	public String getOperator()
+	public String getAction()
 	{
-		return operator;
+		return action;
 	}
 	
-	public void setOperator(String operator)
+	public void setAction(String action)
 	{
-		this.operator = operator;
+		this.action = action;
 	}
 	
 	public Node getParent()

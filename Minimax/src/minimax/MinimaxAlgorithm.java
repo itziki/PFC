@@ -7,7 +7,10 @@ import formulation.Action;
 import formulation.Problem;
 import formulation.State;
 
-public abstract class MinimaxAlgorithm {
+public class MinimaxAlgorithm {
+	
+	/*HAY QUE PASAR EL PROBLEMA PARA COGER EL ESTADO INICIAL Y VER SI ES ESTADO FINAL, SINO NO PODEMOS
+	 * COMPROBAR SI ES ESTADO FINAL PORQUE LA CLASE STATE NO TIENE LA FUNCION*/
 	
 	/*
 	 * 
@@ -22,20 +25,28 @@ public abstract class MinimaxAlgorithm {
 		assign minimax-value to state
 		return minimax-value
 	 * */
-	public int MaxValue(State state)
+	public int UtilytiValue(State state, String player)
+	{
+		return 0;
+	}
+	
+	
+	public int MaxValue(Problem problem)
 	{
 		int minimaxValue = 0;
-		if (state)
+		List<Node> successors = this.expand(node, problem, generatedStates, expandedStates, dice);
+		if (problem.isFinalState(problem.getInitialState()))
 		{
-			minimaxValue = UtilytiValue(state, MAX);
+			minimaxValue = UtilytiValue(problem.getInitialState(), "MAX");
 			return minimaxValue;
 		}
 		else
 		{
 			minimaxValue = -100;
-			for (int i = 0; /*numero piezas*/i<10; i++)
+			for (int i = 0; i <= successors.size(); i++)
 			{
-				minimaxValue = MAX(minimaxValue, MinValue(sucesor))
+				Node successor = successors.get(i);
+				minimaxValue = MAX(minimaxValue, MinValue(successor));
 			}
 			//asign valorMinimax al estado
 			return minimaxValue;
@@ -52,12 +63,12 @@ public abstract class MinimaxAlgorithm {
 			minimax-value = MIN(minimax-value, MAX-VALUE(successor))
 			assign minimax-value to state
 			return minimax-value*/
-	public int MinValue(State state)
+	public int MinValue(Problem problem)
 	{
 		int minimaxValue = 0;
-		if (state)
+		if (problem.isFinalState(problem.getInitialState()))
 		{
-			minimaxValue = UtilytiValue(state, MAX);
+			minimaxValue = UtilytiValue(problem.getInitialState(), "MIN");
 			return minimaxValue;
 		}
 		else
@@ -65,7 +76,7 @@ public abstract class MinimaxAlgorithm {
 			minimaxValue = +100;
 			for (int i = 0; /*numero piezas*/i<10; i++)
 			{
-				minimaxValue = MIN(minimaxValue, MaxValue(successor))
+				minimaxValue = MIN(minimaxValue, MaxValue(successor));
 			}
 			//asign valorMinimax al estado
 			return minimaxValue;
@@ -82,10 +93,10 @@ public abstract class MinimaxAlgorithm {
 			action = successor’s action
 			return action
 		*/
-	public Action Minimax(State state)
+	public Action Minimax(Problem problem)
 	{
 		Action action;
-		int minimaxValue = MaxValue(state);
+		int minimaxValue = MaxValue(problem);
 		boolean bestSuccessorFound = false;
 		while (!bestSuccessorFound)
 		{
@@ -128,7 +139,7 @@ public abstract class MinimaxAlgorithm {
 					    !expandedStates.contains(successorState)) {
 						//make a new node to contain the new successor state
 						successorNode = new Node(successorState);
-						successorNode.setOperator(action.getName());
+						successorNode.setAction(action.getName());
 						successorNode.setParent(node);
 						successorNode.setDepth(node.getDepth() + 1);
 						//add the newly created node to the list of successor nodes.

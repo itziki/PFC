@@ -19,4 +19,5 @@
 <fullyQualifiedTypeName name="parchis.Tablero"/>
 <fullyQualifiedTypeName name="parchis.Jugador"/>
 <fullyQualifiedTypeName name="es.deusto.ingenieria.aike.formulation.State"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>
