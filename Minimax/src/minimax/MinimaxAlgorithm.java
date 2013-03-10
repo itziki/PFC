@@ -9,9 +9,23 @@ import formulation.State;
 
 public class MinimaxAlgorithm {
 	
+	private boolean isComputersTurn = false;
+	private List<State> generatedStates = new ArrayList<State>();
+	private List<State> expandedStates = new ArrayList<State>();
+	
+	
+	public boolean isComputersTurn()
+	{
+		return isComputersTurn;
+	}
+	public void setComputersTurn(boolean isComputersTurn)
+	{
+		this.isComputersTurn = isComputersTurn;
+	}
+
+	
 	/*HAY QUE PASAR EL PROBLEMA PARA COGER EL ESTADO INICIAL Y VER SI ES ESTADO FINAL, SINO NO PODEMOS
 	 * COMPROBAR SI ES ESTADO FINAL PORQUE LA CLASE STATE NO TIENE LA FUNCION*/
-	
 	/*
 	 * 
 	IF Terminal-Test(state) THEN
@@ -25,30 +39,56 @@ public class MinimaxAlgorithm {
 		assign minimax-value to state
 		return minimax-value
 	 * */
-	public int UtilytiValue(State state, String player)
+	
+	public String Minimax(Problem problem, int dice, Node node)
+	{		
+		String action = null;
+		int minimaxValue = MaxValue(problem, dice, node);
+		boolean bestSuccessorFound = false;
+		
+		List<Node> successors = this.expand(problem, generatedStates, expandedStates, dice);
+		
+		while (!bestSuccessorFound)
+		{
+			//sucesor = estado con cada pieza del jugador
+			//sucesor = next state's successor
+			for(int i = 0; i < successors.size(); i++)
+			{
+				if (successors.get(i).getState().getValue() == minimaxValue)
+				//if (MinimaxValue(problem, successors.get(i), dice) == minimaxValue)
+				{
+					bestSuccessorFound = true;
+					action = successors.get(i).getAction();
+				}
+			}
+		}
+		return action;
+	}
+	
+	public int UtilytiValue(State state)
 	{
 		return 0;
 	}
 	
 	
-	public int MaxValue(Problem problem)
-	{
+	public int MaxValue(Problem problem, int dice, Node node)
+	{		
 		int minimaxValue = 0;
-		List<Node> successors = this.expand(node, problem, generatedStates, expandedStates, dice);
 		if (problem.isFinalState(problem.getInitialState()))
 		{
-			minimaxValue = UtilytiValue(problem.getInitialState(), "MAX");
+			minimaxValue = UtilytiValue(problem.getInitialState());
 			return minimaxValue;
 		}
 		else
 		{
+			List<Node> successors = this.expand(problem, generatedStates, expandedStates, dice);
 			minimaxValue = -100;
 			for (int i = 0; i <= successors.size(); i++)
 			{
 				Node successor = successors.get(i);
-				minimaxValue = MAX(minimaxValue, MinValue(successor));
+				minimaxValue = MAX(minimaxValue, MinValue(problem, dice, successor));
+				successor.getState().setValue(minimaxValue);
 			}
-			//asign valorMinimax al estado
 			return minimaxValue;
 		}
 	}
@@ -60,25 +100,27 @@ public class MinimaxAlgorithm {
 		ELSE
 			minimax-value = +infinito
 			FOR EACH successor of state DO
-			minimax-value = MIN(minimax-value, MAX-VALUE(successor))
+			minimax-value = MIN(minimax-value, MAX-VALUE(successor)) //se saca el valor para el jugador min
 			assign minimax-value to state
 			return minimax-value*/
-	public int MinValue(Problem problem)
-	{
+	public int MinValue(Problem problem, int dice, Node node)
+	{		
 		int minimaxValue = 0;
 		if (problem.isFinalState(problem.getInitialState()))
 		{
-			minimaxValue = UtilytiValue(problem.getInitialState(), "MIN");
+			minimaxValue = UtilytiValue(problem.getInitialState());
 			return minimaxValue;
 		}
 		else
 		{
+			List<Node> successors = this.expand(problem, generatedStates, expandedStates, dice);
 			minimaxValue = +100;
-			for (int i = 0; /*numero piezas*/i<10; i++)
+			for (int i = 0; i < successors.size() ; i++)
 			{
-				minimaxValue = MIN(minimaxValue, MaxValue(successor));
+				Node successor = successors.get(i);
+				minimaxValue = MIN(minimaxValue, MaxValue(problem, dice, successor));
+				successor.getState().setValue(minimaxValue);
 			}
-			//asign valorMinimax al estado
 			return minimaxValue;
 		}
 	}
@@ -93,35 +135,39 @@ public class MinimaxAlgorithm {
 			action = successor’s action
 			return action
 		*/
-	public Action Minimax(Problem problem)
+	
+	
+	public int MinimaxValue(Problem problem, Node node, int dice)
 	{
-		Action action;
-		int minimaxValue = MaxValue(problem);
-		boolean bestSuccessorFound = false;
-		while (!bestSuccessorFound)
+		int minimaxValue = 0;
+		if (problem.isFinalState(problem.getInitialState()))
 		{
-			//sucesor = estado con cada pieza del jugador
-			//sucesor = next state's successor
-			if (MinimaxValue(successor) == minimaxValue)
-			{
-				bestSuccessorFound = true;
-				action = null;
-			}
+			minimaxValue = this.UtilytiValue(problem.getInitialState());
 		}
-		return action;
+		else if (!isComputersTurn)
+		{
+			minimaxValue = MaxValue(problem, dice, node);
+		}
+		else if(isComputersTurn)
+		{
+			minimaxValue = MinValue(problem, dice, node);
+		}
+		return minimaxValue;
 	}
 	
-	protected List<Node> expand(Node node, Problem problem, List<State> generatedStates, List<State> expandedStates, int dice)
+	protected List<Node> expand(Problem problem, List<State> generatedStates, List<State> expandedStates, int dice)
+	//Node node, Problem problem, List<State> generatedStates, List<State> expandedStates
 	{
 		List<Node> successorNodes = new ArrayList<Node>();
 		Node successorNode = null;
 		State currentState = null;
 		State successorState = null;
+		Node node = new Node(problem.getInitialState());
 
-		//If neither node or problem are null
-		if (node != null && problem != null) {
-			//Get the node's state.
-			currentState = node.getState();
+		//If problem isn't null
+		if (problem != null) {
+			//The initial state is going to change after every decision
+			currentState = problem.getInitialState();
 			//Remove current state from the list of generated states.
 			generatedStates.remove(currentState);
 			//Insert current state to the list of generated states.

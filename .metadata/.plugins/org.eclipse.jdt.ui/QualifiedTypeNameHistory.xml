@@ -20,4 +20,5 @@
 <fullyQualifiedTypeName name="parchis.Jugador"/>
 <fullyQualifiedTypeName name="es.deusto.ingenieria.aike.formulation.State"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="minimax.MinimaxAlgorithm"/>
 </qualifiedTypeNameHistroy>

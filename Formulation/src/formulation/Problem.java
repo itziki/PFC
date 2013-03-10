@@ -4,9 +4,10 @@ import java.util.List;
 
 public abstract class Problem {
 	
-	//there is only one initialState and one finalState
+	//there is only one initialState -> all chips in their initial square
 	private State initialState;
-	private State finalState;
+	//one final state for each player
+	private List<State> finalStates;
 	private List<Action> actions;
 	
 	protected abstract void createOperators();
@@ -19,13 +20,13 @@ public abstract class Problem {
 	{
 		this.initialState = initialState;
 	}
-	public State getFinalState()
+	public List<State> getFinalStates()
 	{
-		return finalState;
+		return finalStates;
 	}
-	public void addFinalState(State finalState)
+	public void addFinalStates(List<State> finalStates)
 	{
-		this.finalState = finalState;
+		this.finalStates = finalStates;
 	}
 	public List<Action> getActions()
 	{
@@ -38,6 +39,10 @@ public abstract class Problem {
 	
 	public boolean isFinalState(State state)
 	{
-		return state.equals(this.finalState);
+		if (state != null) {
+			return this.finalStates.contains(state);
+		} else {
+			return false;
+		}
 	}
 }

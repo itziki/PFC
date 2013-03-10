@@ -39,19 +39,6 @@
     "javaRuntime": true
   },
   {
-    "symbolicName": "formulation",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "be754502b4835a2d5ee3aa1c9423e7dc227faa62",
-    "jarFileModificationDate": "2013-02-28T18:40:22.716+01:00",
-    "location": "D:\\PFC\\ia\\IAParchis\\lib\\formulation.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "minimax",
     "version": {
       "major": -1,

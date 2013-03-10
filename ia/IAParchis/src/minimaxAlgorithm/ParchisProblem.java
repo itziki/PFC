@@ -1,5 +1,6 @@
 package minimaxAlgorithm;
 
+import minimax.MinimaxAlgorithm;
 import formulation.Problem;
 import formulation.State;
 
@@ -20,9 +21,9 @@ public class ParchisProblem extends Problem {
 		return false;
 	}
 	
-	//public void solve(Minimax minimax)
-	//{
+	public void solveMovement(MinimaxAlgorithm minimaxAlgorithm)
+	{
 		
-	//}
+	}
 
 }
