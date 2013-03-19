@@ -39,6 +39,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "formulation",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "7bb64e97e1f0b46f82609b708322d572db85559c",
+    "jarFileModificationDate": "2013-03-12T17:24:10.169+01:00",
+    "location": "D:\\PFC\\ia\\IAParchis\\lib\\formulation.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "minimax",
     "version": {
       "major": -1,
@@ -46,8 +59,8 @@
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "a29e338a2555ca15014b5263adb55eecbdb54a87",
-    "jarFileModificationDate": "2013-02-28T19:57:44.252+01:00",
+    "jarFileFingerprint": "f1a5b8e454dec8c559f92dcac162c39644df292e",
+    "jarFileModificationDate": "2013-03-12T17:27:37.416+01:00",
     "location": "D:\\PFC\\ia\\IAParchis\\lib\\minimax.jar",
     "javaRuntime": false
   },

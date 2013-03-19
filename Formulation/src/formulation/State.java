@@ -2,7 +2,9 @@ package formulation;
 
 public class State {
 	private Object information;
-	private int value;
+	//the rating value
+	private int rating;
+	private int player; //0-> MAX; 1->MIN
 	
 	public State (Object information)
 	{
@@ -19,14 +21,24 @@ public class State {
 		return this.information.toString();
 	}
 		
-	public int getValue()
+	public int getRating()
 	{
-		return value;
+		return rating;
 	}
 
-	public void setValue(int value)
+	public void setRating(int rating)
 	{
-		this.value = value;
+		this.rating = rating;
+	}
+
+	public int getPlayer()
+	{
+		return player;
+	}
+
+	public void setPlayer(int player)
+	{
+		this.player = player;
 	}
 
 	public boolean equals(Object object)

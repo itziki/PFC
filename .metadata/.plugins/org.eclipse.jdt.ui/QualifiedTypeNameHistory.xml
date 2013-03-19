@@ -20,5 +20,18 @@
 <fullyQualifiedTypeName name="parchis.Jugador"/>
 <fullyQualifiedTypeName name="es.deusto.ingenieria.aike.formulation.State"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.DestroyABarrier"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.EnterFinalCorridor"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.EnterFinalSquare"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.GetOutOfHome"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.JumpABarrier"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.MakeABarrier"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.MoveChip"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.MoveChipInCorridor"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.ReturnChipToHome"/>
+<fullyQualifiedTypeName name="formulation.Action"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="minimax.Node"/>
 <fullyQualifiedTypeName name="minimax.MinimaxAlgorithm"/>
 </qualifiedTypeNameHistroy>
