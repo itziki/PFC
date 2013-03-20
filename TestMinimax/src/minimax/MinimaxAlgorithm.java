@@ -12,8 +12,10 @@ public class MinimaxAlgorithm {
 	private static MinimaxAlgorithm instance;
 	
 	private List<State> generatedStates = new ArrayList<State>();
-	private List<Node> successorFinalNodes = new ArrayList<Node>();
+	private List<Node> successorFinalNodes = null;
 	private List<State> expandedStates = new ArrayList<State>();
+	private int minMinimaxValue;
+	private int maxMinimaxValue;
 	
 	public static MinimaxAlgorithm getInstance()
 	{
@@ -42,12 +44,20 @@ public class MinimaxAlgorithm {
 	{		
 		//String action = null;
 		Node successor = null;
+		
+		minMinimaxValue = +100;
+		maxMinimaxValue = -100;
+		
+		successorFinalNodes = new ArrayList<Node>();
+		successorFinalNodes.add(node);
 		int minimaxValue = MaxValue(problem, dice, node);
 		boolean bestSuccessorFound = false;
 		
 		List<Node> successors = new ArrayList<Node>();
 		for (int i = 0; i < successorFinalNodes.size(); i++)
 		{
+
+			//System.out.println(successorFinalNodes.get(i).getDepth() + ": " + successorFinalNodes.get(i).getState().getRating());
 			if(successorFinalNodes.get(i) != null)
 			{
 				successors.add(successorFinalNodes.get(i));
@@ -55,24 +65,39 @@ public class MinimaxAlgorithm {
 			}
 		}
 		
-		/*for (int z = 0; z < successorFinalNodes.size(); z++)
+		//System.out.println(successorFinalNodes.size());
+		String level0 = "     ";
+		String level1 = "   ";
+		String level2 = " ";
+		String level3 = "";
+		for (int z = 0; z < successorFinalNodes.size(); z++)
 		{
+			//System.out.println(successorFinalNodes.get(z).getAction() + " " + successorFinalNodes.get(z).getDepth() + ": " + successorFinalNodes.get(z).getState().getRating());
+			//System.out.println(successorFinalNodes.get(z).getAction() + " " + successorFinalNodes.get(z).getParent().getDepth() + "->" + successorFinalNodes.get(z).getDepth() + ": " + successorFinalNodes.get(z).getState().getRating());
 			switch (successorFinalNodes.get(z).getDepth())
 			{
 			case 0:
-				System.out.println(successorFinalNodes.get(z).getState().getRating());
+				level0 = level0 + String.valueOf(successorFinalNodes.get(z).getState().getRating());
+				//System.out.println(successorFinalNodes.get(z).getState().getRating());
 				break;
 			case 1:
-				System.out.println("--" + successorFinalNodes.get(z).getState().getRating());
+				level1 = level1 + successorFinalNodes.get(z).getState().getRating() + "   ";
+				//System.out.println("--" + successorFinalNodes.get(z).getState().getRating());
 				break;
 			case 2:
-				System.out.println("----" + successorFinalNodes.get(z).getState().getRating());
+				level2 = level2 + successorFinalNodes.get(z).getState().getRating() + "   ";
+				//System.out.println("----" + successorFinalNodes.get(z).getState().getRating());
 				break;
 			case 3:
-				System.out.println("----" + successorFinalNodes.get(z).getState().getRating());
+				level3 = level3 + successorFinalNodes.get(z).getState().getRating() + " ";
 				break;
 			}
-		}*/
+			
+		}
+		System.out.println(level0);
+		System.out.println(level1);
+		System.out.println(level2);
+		System.out.println(level3);
 		
 		while (!bestSuccessorFound)
 		{
@@ -140,7 +165,7 @@ public class MinimaxAlgorithm {
 		}
 		else
 		{
-			if (node.getDepth() < 3)
+			if (node.getDepth() < 3)//2
 			{
 				List<Node> successors = this.expand(problem, dice, node);
 				//minimaxValue = -100;
@@ -150,13 +175,14 @@ public class MinimaxAlgorithm {
 					Node successor = successors.get(i);
 					//minimaxValue = MAX(minimaxValue, MinValue(problem, dice, successor));
 					int minValue = MinValue(problem, dice, successor);
+					//System.out.println(successor.getDepth() + ": " + minValue);
 					//si el valor del sucesor es mayor que el valor que ya tiene se actualiza
-					minimaxValue = minValue;
-					if (parentValue > minValue)
+					minimaxValue = node.getState().getRating();
+					if (minimaxValue < minValue)
 					{
-						minimaxValue = parentValue;
+						minimaxValue = minValue;
 					}
-					successor.getState().setRating(minimaxValue);
+					node.getState().setRating(minimaxValue);
 				}
 				return minimaxValue;
 			}
@@ -193,7 +219,7 @@ public class MinimaxAlgorithm {
 		}
 		else
 		{
-			if (node.getDepth() < 3)
+			if (node.getDepth() < 4) //3
 			{
 				List<Node> successors = this.expand(problem, dice, node);
 				minimaxValue = +100;
@@ -202,12 +228,12 @@ public class MinimaxAlgorithm {
 					Node successor = successors.get(i);
 					//minimaxValue = MIN(minimaxValue, MaxValue(problem, dice, successor));
 					int maxValue = MaxValue(problem, dice, successor);
-					minimaxValue = maxValue;
-					if (maxValue < parentValue)
+					minimaxValue = node.getState().getRating();
+					if (maxValue < minimaxValue)//aqui habría que borrar el valor que tenga el nodo la primera vez que se pasa
 					{
 						minimaxValue = maxValue;
 					}
-					successor.getState().setRating(minimaxValue);
+					node.getState().setRating(minimaxValue);
 				}
 				return minimaxValue;
 			}
@@ -250,7 +276,7 @@ public class MinimaxAlgorithm {
 		if (problem != null) {
 			currentState = problem.getCurrentState();
 			//Remove current state from the list of generated states.
-			generatedStates.remove(currentState);
+			//generatedStates.remove(currentState);
 			//Insert current state to the list of generated states.
 			expandedStates.add(currentState);
 			//If the state is not null
@@ -259,7 +285,8 @@ public class MinimaxAlgorithm {
 				//System.out.println("problem.action: " + problem.getActions().size());
 				for (Action action : problem.getActions()) {
 					//Apply the operator to the current state
-					successorState = action.apply(currentState, dice);
+					State stateToBeExpanded = currentState.clone("clonado");
+					successorState = action.apply(stateToBeExpanded, dice);
 					//If the operator has been successfully applied and the resulting successor
 					//state hadn't been previously generated nor expanded
 					if (successorState != null) {
@@ -269,13 +296,17 @@ public class MinimaxAlgorithm {
 						successorNode.setAction(action.getName());
 						successorNode.setParent(node);
 						successorNode.setDepth(node.getDepth() + 1);
-
-						System.out.println(successorNode.getDepth() + ": " + successorNode.getState().getRating());
+						if (successorNode.getDepth() < 2) //HARDCODED!!!!
+						{
+							successorNode.getState().setRating(100);
+						}
+						//System.out.println(successorNode.getAction() + " " + successorNode.getParent().getDepth() + "->" + successorNode.getDepth() + ": " + successorNode.getState().getRating());
 						//add the newly created node to the list of successor nodes.
 						successorNodes.add(successorNode);
 						//Insert current successor State to the list of generated states
 						generatedStates.add(successorState);	
 						successorFinalNodes.add(successorNode);
+						//System.out.println(successorNode.getDepth() + ": " + successorNode.getState().getRating());
 						//System.out.print(successorNode.getDepth() + ", ");
 					}
 				}

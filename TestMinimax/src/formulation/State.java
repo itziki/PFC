@@ -1,5 +1,6 @@
 package formulation;
 
+
 public class State {
 	private Object information;
 	//the rating value
@@ -60,5 +61,12 @@ public class State {
 			return false;
 		}
 		
+	}
+	
+	public State clone(String information) {
+		State newState = new State(information);
+		newState.setPlayer(this.player);
+		
+		return newState;
 	}
 }
