@@ -1,6 +1,8 @@
 package formulation;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class Problem {
 	
@@ -12,7 +14,16 @@ public abstract class Problem {
 	private List<State> finalStates;
 	private List<Action> actions;
 	
-	protected abstract void createOperators();
+	public Problem() {
+		this.initialState = null;
+		this.finalStates = new ArrayList<State>();
+		this.actions = new ArrayList<Action>();
+		
+		this.createActions();
+	}
+	
+	
+	protected abstract void createActions();
 	
 	public State getInitialState()
 	{

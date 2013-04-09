@@ -86,7 +86,14 @@ public class Node implements Comparable<Node> {
 	public boolean equals(Object object)
 	{
 		if (object != null && object instanceof Node) {
-			return this.state.equals(((Node) object).state);
+			if (this.state.equals(((Node) object).state) && (this.action.equals(((Node) object).action)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		} else {
 			return false;
 		}

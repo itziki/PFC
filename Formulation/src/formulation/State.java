@@ -1,7 +1,9 @@
 package formulation;
 
+
 public class State {
-	private Object information;
+	private Object information; //informacion => tablero
+	private Object pieza;
 	//the rating value
 	private int rating;
 	private int player; //0-> MAX; 1->MIN
@@ -45,12 +47,37 @@ public class State {
 	{
 		if(object instanceof State && object != null)
 		{
-			return ((State) object).information.equals(this.information);
+			//System.out.print(((State) object).information.equals(this.information));
+			if( ((State) object).information.equals(this.information) && ((State) object).rating == (this.rating))
+			{
+				return true;
+			}			
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
 			return false;
 		}
 		
+	}
+	
+	public State clone(String information) {
+		State newState = new State(information);
+		newState.setPlayer(this.player);
+		
+		return newState;
+	}
+
+	public Object getPieza()
+	{
+		return pieza;
+	}
+
+	public void setPieza(Object pieza)
+	{
+		this.pieza = pieza;
 	}
 }

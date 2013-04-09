@@ -1,10 +1,6 @@
 package parchis;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +9,12 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Tablero extends JApplet {
 	private Casillero casillero = new Casillero();
 	private Jugador jugador[]; /*0- amarillo; 1-azul; 2-rojo; 3-verde*/
+	private Dado dado;
 	JPanel principal;
 	JPanel fichaPanel;
 	JFrame frame;
@@ -83,6 +79,12 @@ public class Tablero extends JApplet {
         super.paintComponents(g);
         g.drawImage(img, 0, 0, null); // see javadoc for more info on the parameters            
     }
+	public Dado getDado() {
+		return dado;
+	}
+	public void setDado(Dado dado) {
+		this.dado = dado;
+	}
 
 
 }

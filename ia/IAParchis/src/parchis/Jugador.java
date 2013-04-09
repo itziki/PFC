@@ -1,5 +1,7 @@
 package parchis;
 
+import java.util.List;
+
 /**
  * REGLAS DEL ALGORITMO Y FUNCION DE UTILIDAD
  * a) Si con el movimiento...
@@ -24,7 +26,7 @@ public class Jugador {
 		Pieza piezaElegida = null;
 		Casilla[] casillas = casillero.getCasillas();
 		Pieza[] piezas = casillero.getPiezas();
-		Pieza[] piezasEnCasilla = null;
+		List<Pieza> piezasEnCasilla = null;
 		/*regla a*/
 		for (int i = 0; i < piezas.length; i= i+1)
 		{

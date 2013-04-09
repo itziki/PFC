@@ -62,4 +62,10 @@ public class ParchisProblem extends Problem {
 		
 	}
 
+	@Override
+	protected void createActions() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

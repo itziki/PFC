@@ -4,10 +4,10 @@ public class Casillero {
 	private Casilla[] casillas = new Casilla[104]; /*numero total de casillas del tablero*/
 	private Pieza[] piezas; /*todas las piezas del juego*/
 	/*
-	 * 0 - Casa amarilla
-	 * 1 - Casa azul
-	 * 2 - Casa roja
-	 * 3 - Casa verde
+	 * 0 - Seguro amarillo
+	 * 1 - Seguro azul
+	 * 2 - Seguro rojo
+	 * 3 - Seguro verde
 	 * 12..71 - Tablero
 	 * 72..79 - Pasillo amarillo
 	 * 80..87 - pasillo azul

@@ -13,9 +13,6 @@
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="parchis.ImageLabel"/>
-<fullyQualifiedTypeName name="parchis.Partida"/>
-<fullyQualifiedTypeName name="parchis.Pieza"/>
-<fullyQualifiedTypeName name="parchis.Tablero"/>
 <fullyQualifiedTypeName name="parchis.Jugador"/>
 <fullyQualifiedTypeName name="es.deusto.ingenieria.aike.formulation.State"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
@@ -28,10 +25,16 @@
 <fullyQualifiedTypeName name="minimaxAlgorithm.MoveChip"/>
 <fullyQualifiedTypeName name="minimaxAlgorithm.MoveChipInCorridor"/>
 <fullyQualifiedTypeName name="minimaxAlgorithm.ReturnChipToHome"/>
-<fullyQualifiedTypeName name="formulation.Action"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="minimax.Node"/>
 <fullyQualifiedTypeName name="minimax.MinimaxAlgorithm"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="formulation.Action"/>
+<fullyQualifiedTypeName name="parchis.Tablero"/>
+<fullyQualifiedTypeName name="parchis.Partida"/>
+<fullyQualifiedTypeName name="parchis.Casillero"/>
+<fullyQualifiedTypeName name="parchis.Pieza"/>
+<fullyQualifiedTypeName name="parchis.Casilla"/>
+<fullyQualifiedTypeName name="parchis.Dado"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
