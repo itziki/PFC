@@ -16,12 +16,13 @@ public class ReturnChipToHome extends Action {
 	@Override
 	protected State effect(State state, int dice) {
 		
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//La ficha vuelve a la casa del principio
 		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla() + dice].getPiezas().get(0).setCasilla(104);
 		State newState = new State(currentPartida);
+		newState.setRating(9);
 		
 		return newState;
 	}
@@ -31,7 +32,7 @@ public class ReturnChipToHome extends Action {
 	{		
 		boolean isApplicable = false;
 		//cogemos el information, que sera el tablero
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();

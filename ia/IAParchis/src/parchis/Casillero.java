@@ -1,8 +1,11 @@
 package parchis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Casillero {
-	private Casilla[] casillas = new Casilla[104]; /*numero total de casillas del tablero*/
-	private Pieza[] piezas; /*todas las piezas del juego*/
+	private Casilla[] casillas = new Casilla[105]; /*numero total de casillas del tablero*/
+	private List<Pieza> piezas = new ArrayList<Pieza>(); /*todas las piezas del juego*/
 	/*
 	 * 0 - Seguro amarillo
 	 * 1 - Seguro azul
@@ -24,12 +27,26 @@ public class Casillero {
 		this.casillas = casillas;
 	}
 
-	public Pieza[] getPiezas() {
+	public List<Pieza> getPiezas() {
 		return piezas;
 	}
 
-	public void setPiezas(Pieza[] piezas) {
+	public void setPiezas(List<Pieza> piezas) {
 		this.piezas = piezas;
+	}
+	
+	public List<Pieza> getPiezasJugador(int jugador)
+	{
+		List<Pieza> piezasJugador = new ArrayList<Pieza>();
+		for(int i = 0; i < piezas.size(); i++)
+		{
+			if(piezas.get(i).getColor() == jugador)
+			{
+				piezasJugador.add(piezas.get(i));
+			}
+		}
+		return piezasJugador;
+		
 	}
 	
 	public void iniciarCasillero()
@@ -49,6 +66,7 @@ public class Casillero {
 		{			
 			casillas[i] = new Casilla(true);
 		}
+		casillas[104] = new Casilla(false);
 	}
 	
 	/*0 - Casa amarilla
@@ -102,5 +120,28 @@ public class Casillero {
 				break;
 		}
 		return estaEnFinal;
+	}
+	
+	public Casillero clone()
+	{
+		Casillero newCasillero = new Casillero();
+		
+		List<Pieza> newPiezas = new ArrayList<Pieza>();
+		for(int i = 0; i < piezas.size(); i++)
+		{
+			newPiezas.add((Pieza) piezas.get(i).clone());
+		}
+		
+		Casilla[] newCasillas = new Casilla[105];
+		for(int i = 0; i < casillas.length; i++)
+		{
+			newCasillas[i] = (Casilla) casillas[i].clone();
+		}
+		
+		newCasillero.setCasillas(newCasillas);
+		newCasillero.setPiezas(newPiezas);
+		
+		return newCasillero;
+		
 	}
 }

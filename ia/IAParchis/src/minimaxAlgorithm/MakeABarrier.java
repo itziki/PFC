@@ -18,12 +18,13 @@ public class MakeABarrier extends Action {
 	@Override
 	protected State effect(State state, int dice) {
 		
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//Las fichas que no sean del color de la barrera no pueden pasar -> se meten las dos fichas en la casilla
 		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla()].addPiezaToCasilla(piezaSelect);
-		State newState = new State(currentPartida);		
+		State newState = new State(currentPartida);
+		newState.setRating(5);	
 		
 		return newState;
 	}
@@ -33,7 +34,7 @@ public class MakeABarrier extends Action {
 	{
 		boolean isApplicable = false;
 		//cogemos el information, que sera el tablero
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
 		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover

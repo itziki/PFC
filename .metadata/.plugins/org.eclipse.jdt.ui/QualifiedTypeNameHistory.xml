@@ -29,12 +29,17 @@
 <fullyQualifiedTypeName name="minimax.MinimaxAlgorithm"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="formulation.Action"/>
-<fullyQualifiedTypeName name="parchis.Tablero"/>
-<fullyQualifiedTypeName name="parchis.Partida"/>
-<fullyQualifiedTypeName name="parchis.Casillero"/>
-<fullyQualifiedTypeName name="parchis.Pieza"/>
-<fullyQualifiedTypeName name="parchis.Casilla"/>
 <fullyQualifiedTypeName name="parchis.Dado"/>
-<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="parchis.Casilla"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="parchis.Casillero"/>
+<fullyQualifiedTypeName name="parchis.Tablero"/>
+<fullyQualifiedTypeName name="minimaxAlgorithm.ParchisProblem"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="formulation.State"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="parchis.Pieza"/>
+<fullyQualifiedTypeName name="parchis.Partida"/>
 </qualifiedTypeNameHistroy>

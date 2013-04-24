@@ -39,6 +39,19 @@
     "javaRuntime": true
   },
   {
+    "symbolicName": "formulation",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "c62869955817c46bd941b0d27fa2da242f7eafa3",
+    "jarFileModificationDate": "2013-04-15T17:52:43.538+02:00",
+    "location": "D:\\PFC\\ia\\IAParchis\\lib\\formulation.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "minimax",
     "version": {
       "major": -1,
@@ -49,19 +62,6 @@
     "jarFileFingerprint": "79e2f520956be28e1ed517e9e1d176af01e1f3b4",
     "jarFileModificationDate": "2013-04-08T16:54:39.775+02:00",
     "location": "D:\\PFC\\ia\\IAParchis\\lib\\minimax.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "formulation",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "bfd02dd2145d82083aa692988f2e162ce7ae7bb1",
-    "jarFileModificationDate": "2013-04-08T17:49:50.575+02:00",
-    "location": "D:\\PFC\\ia\\IAParchis\\lib\\formulation.jar",
     "javaRuntime": false
   },
   {
@@ -76,6 +76,19 @@
     "jarFileModificationDate": "2011-09-02T06:33:38.312+02:00",
     "location": "C:\\Program Files\\Java\\jre6\\lib\\jce.jar",
     "javaRuntime": true
+  },
+  {
+    "symbolicName": "formulation",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "cbf8cd3f088596149a4375660a5dc68b6cf3d743",
+    "jarFileModificationDate": "2013-04-08T16:52:24.515+02:00",
+    "location": "D:\\PFC\\minimax\\formulation.jar",
+    "javaRuntime": false
   },
   {
     "symbolicName": "jre",

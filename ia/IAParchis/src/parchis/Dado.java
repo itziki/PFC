@@ -9,6 +9,11 @@ public class Dado {
 	private List<Integer> consecutive6 = new ArrayList<Integer>();
 	private int value;
 	
+	public Dado()
+	{
+		
+	}
+	
 	public Dado(int value)
 	{
 		this.value = value;

@@ -19,13 +19,15 @@ public class MoveChip extends Action {
 	@Override
 	protected State effect(State state, int dice) {
 		//La ficha se mueve hacia delante el número de casillas correspondiente
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		int nuevaCasilla = piezaSelect.getCasilla() + dice;
 		Casillero casillero = currentPartida.getTablero().getCasillero();
 		casillero.getCasillas()[nuevaCasilla].addPiezaToCasilla(piezaSelect);
 		currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
 		State newState = new State(currentPartida);
+		newState.setRating(1);
+		
 		return newState;
 	}
 
@@ -34,7 +36,7 @@ public class MoveChip extends Action {
 	{		
 		boolean isApplicable = false;
 		//cogemos el information, que sera el tablero
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
 		Casilla[] casillas = casillero.getCasillas();

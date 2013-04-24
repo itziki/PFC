@@ -1,46 +1,74 @@
 package parchis;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+//import java.awt.Graphics;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
+//import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JApplet;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+//import javax.imageio.ImageIO;
+//import javax.swing.ImageIcon;
+//import javax.swing.JApplet;
+//import javax.swing.JFrame;
+//import javax.swing.JPanel;
 
-public class Tablero extends JApplet {
+public class Tablero /*extends JApplet */{
 	private Casillero casillero = new Casillero();
-	private Jugador jugador[]; /*0- amarillo; 1-azul; 2-rojo; 3-verde*/
-	private Dado dado;
-	JPanel principal;
+	private List<Jugador> jugadores = new ArrayList<Jugador>(); /*0- amarillo; 1-azul; 2-rojo; 3-verde*/
+	private Dado dado = new Dado();//null
+	/*JPanel principal;
 	JPanel fichaPanel;
 	JFrame frame;
 	BufferedImage img = null;
-	Graphics g;
+	Graphics g;*/
 	
 	private static final long serialVersionUID = 1L;
+	
+	public Tablero()
+	{
+		
+	}
+	
 	public Casillero getCasillero() {
 		return casillero;
 	}
 	public void setCasillero(Casillero casillero) {
 		this.casillero = casillero;
 	}
-	public Jugador[] getJugador() {
-		return jugador;
+	public List<Jugador> getJugadores() {
+		return jugadores;
 	}
-	public void setJugador(Jugador[] jugador) {
-		this.jugador = jugador;
+	public void setJugadores(List<Jugador> jugador) {
+		this.jugadores = jugador;
 	}
 	
-	public void iniciarTablero()
+	public void iniciarTablero(int jugadorNumbers)
 	{
 		casillero.iniciarCasillero();
+		for(int i = 0; i < jugadorNumbers; i++)
+		{
+			jugadores.add(new Jugador(i));
+		}
 	}
 	
-	public void init(){
+	public Tablero clone()
+	{
+		Tablero tableroCloned = new Tablero();
+		
+		List<Jugador> newJugadores = new ArrayList<Jugador>();
+		for(int i = 0; i < jugadores.size(); i++)
+		{
+			newJugadores.add(jugadores.get(i).clone());
+		}
+		
+		tableroCloned.setCasillero(this.casillero.clone());
+		tableroCloned.setJugadores(newJugadores);
+		tableroCloned.setDado(dado);
+		return tableroCloned;		
+	}
+	
+	/*public void init(){
 		principal = new JPanel();
 		fichaPanel = new JPanel();
 		ImageLabel label = new ImageLabel(new ImageIcon("D:/PFC/pictures/tablero.png"));
@@ -64,7 +92,7 @@ public class Tablero extends JApplet {
 		//p.setLayout(new GridLayout(3,3,10,10));
 	}
 	
-	 public void ImagePanel() {
+	/* public void ImagePanel() {
 		 try
 			{
 			    img = ImageIO.read(new File("Tablero_parchis.png"));
@@ -78,7 +106,7 @@ public class Tablero extends JApplet {
 	public void paintComponents(Graphics g) {
         super.paintComponents(g);
         g.drawImage(img, 0, 0, null); // see javadoc for more info on the parameters            
-    }
+    }*/
 	public Dado getDado() {
 		return dado;
 	}

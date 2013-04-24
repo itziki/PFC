@@ -10,22 +10,19 @@ import formulation.Action;
 import formulation.State;
 
 public class GetOutOfHome extends Action {
+	int numeroFicha = 0;
 
-	public GetOutOfHome(String name) {
+	public GetOutOfHome(String name, int numeroFicha) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		this.numeroFicha = numeroFicha;
 	}
 
 	@Override
 	protected State effect(State state, int dice) {
-		/*
-		o	La ficha sale y se queda en la casilla de salida
-		o	Si hay dos fichas de otro color en la casilla se come la última que ha llegado
-		o	Si hay una ficha de mi color hago barrera
-*/
-
-		Partida currentPartida = (Partida)state.getInformation();
-		Pieza piezaSelec = (Pieza)state.getPieza();
+		
+		Partida currentPartida = (Partida)state.getPartida();
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
 		Casillero casillero = currentPartida.getTablero().getCasillero();
 		
 		//La ficha sale y se queda en la casilla de salida
@@ -50,7 +47,11 @@ public class GetOutOfHome extends Action {
 		}
 		
 		currentPartida.getTablero().getCasillero().getCasillas()[currentPartida.getColorJugador()].setPiezas(piezas);
-		State newState = new State(currentPartida);
+		State newState = new State("get_out_of_home");
+		newState.setPartida(currentPartida);
+		newState.setPieza(piezaSelec);
+		newState.setRating(6);
+		
 		return newState;
 	}
 
@@ -59,10 +60,11 @@ public class GetOutOfHome extends Action {
 	{		
 		boolean isApplicable = false;
 		//cogemos el information, que sera el tablero
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
-		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
 		int casilla = piezaSelec.getCasilla();
 		
 		//Si la ficha está en casa

@@ -21,18 +21,23 @@ import java.util.List;
 public class Jugador {
 	private int colorPiezas;/*0- amarillo; 1-azul; 2-rojo; 3-verde*/
 	
+	public Jugador(int colorPiezas)
+	{
+		this.colorPiezas = colorPiezas;
+	}
+	
 	public Pieza selectPieza(Casillero casillero, int dado){
 		int rating = 0;
 		Pieza piezaElegida = null;
 		Casilla[] casillas = casillero.getCasillas();
-		Pieza[] piezas = casillero.getPiezas();
+		List<Pieza> piezas = casillero.getPiezas();
 		List<Pieza> piezasEnCasilla = null;
 		/*regla a*/
-		for (int i = 0; i < piezas.length; i= i+1)
+		for (int i = 0; i < piezas.size(); i= i+1)
 		{
-			if (piezas[i].getColor() == this.colorPiezas)
+			if (piezas.get(i).getColor() == this.colorPiezas)
 			{
-				int casillaPieza = piezas[i].getCasilla();
+				int casillaPieza = piezas.get(i).getCasilla();
 				int casillasPorDelante = casillaPieza + 7;
 				int casillasPorDetras = casillaPieza - 7;
 				int reduccionPiezasAtacantes = 0;
@@ -100,15 +105,15 @@ public class Jugador {
 							rating -= 9;
 						}
 					}
-					for(int k = 0; k < piezas.length; k++)
+					for(int k = 0; k < piezas.size(); k++)
 					{
-						if (piezas[k].getCasilla() == casillaPieza)
-							if (piezas[k].getColor() != this.colorPiezas)
+						if (piezas.get(k).getCasilla() == casillaPieza)
+							if (piezas.get(k).getColor() != this.colorPiezas)
 								rating -= 6;
 					}
 				}
 				/*regla c: 1-recorrido/10*/
-				rating -= (1-piezas[i].getRecorrido()/10);
+				rating -= (1-piezas.get(i).getRecorrido()/10);
 			}
 		}
 			
@@ -120,4 +125,11 @@ public class Jugador {
 	public void setColorPiezas(int colorPiezas) {
 		this.colorPiezas = colorPiezas;
 	}
+	
+	public Jugador clone()
+	{
+		Jugador newJugador = new Jugador(this.colorPiezas);
+		return newJugador;
+	}
 }
+

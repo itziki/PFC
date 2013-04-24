@@ -66,4 +66,16 @@ public class Casilla {
 		}
 		return miPieza;
 	}
+	
+	public Casilla clone()
+	{
+		Casilla newCasilla = new Casilla(this.esSegura);
+		newCasilla.numeroFichas = this.numeroFichas;
+		List<Pieza> newPiezas = new ArrayList<Pieza>();
+		for(int i = 0; i < piezas.size(); i++)
+		{
+			newPiezas.add((Pieza) piezas.get(i).clone());
+		}
+		return newCasilla;
+	}
 }

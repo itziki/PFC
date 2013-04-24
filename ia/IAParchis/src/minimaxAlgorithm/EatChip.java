@@ -19,7 +19,7 @@ public class EatChip extends Action {
 	@Override
 	protected State effect(State state, int dice)
 	{
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//Se mueven 20 casillas con la ficha que se quiera
@@ -27,7 +27,9 @@ public class EatChip extends Action {
 		
 		//La ficha comida vuelve a casa
 		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla() + dice].getPiezas().get(0).setCasilla(104);
-		State newState = new State(currentPartida);		
+		State newState = new State("partida");
+		newState.setPartida(currentPartida);
+		newState.setRating(8);	
 		
 		return newState;
 	}
@@ -37,25 +39,29 @@ public class EatChip extends Action {
 	{
 		
 		boolean isApplicable = false;
-		Partida currentPartida = (Partida)state.getInformation();
+		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
 		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
-		//Si en la última casilla del movimiento que toque hay una ficha de otro color distinto al nuestro y no está en seguro
-		int numeroNuevaCasilla = casilla + dice;
-		Casilla nuevaCasilla = casillero.getCasillas()[numeroNuevaCasilla];
-		if(nuevaCasilla.getPiezas().size() == 1 && !(nuevaCasilla.isEsSegura()))
+		//Si la ficha está fuera de casa
+		if((casilla < 104) && (casilla >= 0))
 		{
-			if(nuevaCasilla.getPiezas().get(0).getColor() != currentPartida.getColorJugador())
+			//Si en la última casilla del movimiento que toque hay una ficha de otro color distinto al nuestro y no está en seguro
+			int numeroNuevaCasilla = casilla + dice;
+			Casilla nuevaCasilla = casillero.getCasillas()[numeroNuevaCasilla];
+			if(nuevaCasilla.getPiezas().size() == 1 && !(nuevaCasilla.isEsSegura()))
 			{
-				isApplicable = true;
-			}
-			else
-			{
-				isApplicable = false;
-			}
+				if(nuevaCasilla.getPiezas().get(0).getColor() != currentPartida.getColorJugador())
+				{
+					isApplicable = true;
+				}
+				else
+				{
+					isApplicable = false;
+				}
+			}	
 		}
 		
 		return isApplicable;
