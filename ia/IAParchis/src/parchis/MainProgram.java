@@ -1,9 +1,6 @@
 package parchis;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
+import paintPackage.TableroGraphics;
 
 import minimaxAlgorithm.ParchisProblem;
 import formulation.State;
@@ -32,14 +29,15 @@ public class MainProgram
 		}
 	    System.out.println(s);
 		int players = Integer.parseInt(s); */
-		int players = 2;
+		int players = 4;
 		int jugadas = 2;
 		try
 		{		
 			ParchisProblem problem = new ParchisProblem(players);
 			State state = problem.getCurrentState();
+			TableroGraphics tableroGraphics = new TableroGraphics(state.getPartida());
 			int player = problem.getCurrentState().getPlayer();
-			while(true)
+			//while(problem.isFinalState(problem.getCurrentState()))
 			{
 				if(player == 0)
 				{
@@ -56,6 +54,8 @@ public class MainProgram
 					}
 					//player = 0;
 				}
+
+				tableroGraphics.draw();
 			}
 			/*while (!(problem.isFinalState(problem.getCurrentState())))
 			{

@@ -29,7 +29,7 @@ public class GetOutOfHome extends Action {
 		piezaSelec.setCasilla(currentPartida.getColorJugador());
 		
 		//Si hay dos fichas de otro color en la casilla se come la última que ha llegado
-		List<Pieza> piezas = casillero.getCasillas()[currentPartida.getColorJugador()].getPiezas();
+		List<Pieza> piezas = casillero.getCasillas().get(currentPartida.getColorJugador()).getPiezas();
 			//piezas->piezas de la casilla de salida
 		if (piezas.size() == 2)
 		{
@@ -46,7 +46,7 @@ public class GetOutOfHome extends Action {
 			}
 		}
 		
-		currentPartida.getTablero().getCasillero().getCasillas()[currentPartida.getColorJugador()].setPiezas(piezas);
+		currentPartida.getTablero().getCasillero().getCasillas().get(currentPartida.getColorJugador()).setPiezas(piezas);
 		State newState = new State("get_out_of_home");
 		newState.setPartida(currentPartida);
 		newState.setPieza(piezaSelec);
@@ -93,7 +93,7 @@ public class GetOutOfHome extends Action {
 		case 0:		
 			if(casilla == 0)
 			{
-				if(!(casillero.getCasillas()[casilla].getPiezas().size() == 2))
+				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
 				{
 					isApplicable = true;
 				}
@@ -102,7 +102,7 @@ public class GetOutOfHome extends Action {
 		case 1:
 			if(casilla == 1)
 			{
-				if(!(casillero.getCasillas()[casilla].getPiezas().size() == 2))
+				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
 				{
 					isApplicable = true;
 				}
@@ -111,7 +111,7 @@ public class GetOutOfHome extends Action {
 		case 2:
 			if(casilla == 2)
 			{
-				if(!(casillero.getCasillas()[casilla].getPiezas().size() == 2))
+				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
 				{
 					isApplicable = true;
 				}
@@ -120,7 +120,7 @@ public class GetOutOfHome extends Action {
 		case 3:
 			if(casilla == 3)
 			{
-				if(!(casillero.getCasillas()[casilla].getPiezas().size() == 2))
+				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
 				{
 					isApplicable = true;
 				}

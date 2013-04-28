@@ -26,7 +26,7 @@ public class EatChip extends Action {
 		currentPartida.getTablero().setDado(new Dado(20));
 		
 		//La ficha comida vuelve a casa
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla() + dice].getPiezas().get(0).setCasilla(104);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla() + dice).getPiezas().get(0).setCasilla(104);
 		State newState = new State("partida");
 		newState.setPartida(currentPartida);
 		newState.setRating(8);	
@@ -50,7 +50,7 @@ public class EatChip extends Action {
 		{
 			//Si en la última casilla del movimiento que toque hay una ficha de otro color distinto al nuestro y no está en seguro
 			int numeroNuevaCasilla = casilla + dice;
-			Casilla nuevaCasilla = casillero.getCasillas()[numeroNuevaCasilla];
+			Casilla nuevaCasilla = casillero.getCasillas().get(numeroNuevaCasilla);
 			if(nuevaCasilla.getPiezas().size() == 1 && !(nuevaCasilla.isEsSegura()))
 			{
 				if(nuevaCasilla.getPiezas().get(0).getColor() != currentPartida.getColorJugador())

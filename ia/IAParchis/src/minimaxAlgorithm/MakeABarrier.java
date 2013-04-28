@@ -22,7 +22,7 @@ public class MakeABarrier extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//Las fichas que no sean del color de la barrera no pueden pasar -> se meten las dos fichas en la casilla
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla()].addPiezaToCasilla(piezaSelect);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).addPiezaToCasilla(piezaSelect);
 		State newState = new State(currentPartida);
 		newState.setRating(5);	
 		
@@ -42,7 +42,7 @@ public class MakeABarrier extends Action {
 		
 		//Si en la última casilla del movimiento que toque hay SÓLO una ficha de nuestro color
 		int numeroNuevaCasilla = casilla + dice;
-		Casilla nuevaCasilla = casillero.getCasillas()[numeroNuevaCasilla];
+		Casilla nuevaCasilla = casillero.getCasillas().get(numeroNuevaCasilla);
 		if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
 		{
 			if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color

@@ -1,5 +1,7 @@
 package minimaxAlgorithm;
 
+import java.util.List;
+
 import parchis.Casilla;
 import parchis.Casillero;
 import parchis.Partida;
@@ -23,7 +25,7 @@ public class MoveChip extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		int nuevaCasilla = piezaSelect.getCasilla() + dice;
 		Casillero casillero = currentPartida.getTablero().getCasillero();
-		casillero.getCasillas()[nuevaCasilla].addPiezaToCasilla(piezaSelect);
+		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelect);
 		currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
 		State newState = new State(currentPartida);
 		newState.setRating(1);
@@ -39,7 +41,7 @@ public class MoveChip extends Action {
 		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
-		Casilla[] casillas = casillero.getCasillas();
+		List<Casilla> casillas = casillero.getCasillas();
 		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
@@ -78,7 +80,7 @@ public class MoveChip extends Action {
 		//Si no hay barreras de otro color en la distancia a recorrer.
 		for (int i = casilla; i <= casilla + dice; i++)
 		{
-			if (!(casillas[i].getPiezas().size() == 2))
+			if (!(casillas.get(i).getPiezas().size() == 2))
 			{
 				isApplicable = true;
 			}

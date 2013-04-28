@@ -37,7 +37,7 @@ public class EnterFinalSquare extends Action {
 			break;
 		};
 		
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla()].getPiezas().get(0).setCasilla(nuevaCasilla);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).getPiezas().get(0).setCasilla(nuevaCasilla);
 		State newState = new State(currentPartida);
 		newState.setRating(9);
 		

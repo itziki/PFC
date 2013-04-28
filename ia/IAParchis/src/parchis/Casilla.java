@@ -1,5 +1,6 @@
 package parchis;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class Casilla {
 	private boolean esSegura; /*si la casilla es segura, es decir, si pueden comerse fichas o no*/
 	private int numeroFichas; /*fichas que hay en la casilla. Máximo 2*/
 	private List<Pieza> piezas = new ArrayList<Pieza>(); /*piezas de esa casilla*/
+	private Point posicion = new Point(); //posición en la imagen del tablero
 	
 	public Casilla (boolean esSegura)
 	{
@@ -38,6 +40,17 @@ public class Casilla {
 		this.piezas.add(pieza);
 	}
 	
+	
+
+	public Point getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(int x, int y) {
+		this.posicion.x = x;
+		this.posicion.y = y;
+	}
+
 	//esta funcion mira a ver si esta en una casilla con una pieza di distinto color (osea, en un seguro) si estan haciendo
 	//barrera el mismo color esta tendria que dar false y la cantidad de piezas en una casilla seria de 2
 	public boolean comparteCasillaConPieza(int color)

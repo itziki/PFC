@@ -23,7 +23,7 @@ public class DestroyABarrier extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//La barrera se rompe moviendo una ficha, la 0
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla() + dice].getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla() + dice).getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
 
 		State newState = new State("partida");
 		newState.setPartida(currentPartida);
@@ -42,7 +42,7 @@ public class DestroyABarrier extends Action {
 		int casilla = piezaSelec.getCasilla();
 		
 		//Si hay una barrera hecha
-		Casilla casillaPieza = tablero.getCasillero().getCasillas()[casilla];
+		Casilla casillaPieza = tablero.getCasillero().getCasillas().get(casilla);
 		if(casillaPieza.getPiezas().size() == 2)
 		{
 			if(casillaPieza.getPiezas().get(0).getColor() == casillaPieza.getPiezas().get(1).getColor())

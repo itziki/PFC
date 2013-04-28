@@ -19,7 +19,7 @@ public class EnterFinalCorridor extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//la ficha entra en el pasillo
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla()].getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
 		State newState = new State(currentPartida);
 		newState.setRating(7);
 		

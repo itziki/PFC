@@ -20,7 +20,7 @@ public class ReturnChipToHome extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//La ficha vuelve a la casa del principio
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla() + dice].getPiezas().get(0).setCasilla(104);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla() + dice).getPiezas().get(0).setCasilla(104);
 		State newState = new State(currentPartida);
 		newState.setRating(9);
 		

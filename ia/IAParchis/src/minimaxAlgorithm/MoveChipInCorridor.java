@@ -19,7 +19,7 @@ public class MoveChipInCorridor extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//la ficha se mueve dentro del pasillo
-		currentPartida.getTablero().getCasillero().getCasillas()[piezaSelect.getCasilla()].getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
 		State newState = new State(currentPartida);
 		newState.setRating(1);
 		

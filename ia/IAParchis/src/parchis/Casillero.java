@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Casillero {
-	private Casilla[] casillas = new Casilla[105]; /*numero total de casillas del tablero*/
+	private List<Casilla> casillas = new ArrayList<Casilla>(); /*numero total de casillas del tablero*/
 	private List<Pieza> piezas = new ArrayList<Pieza>(); /*todas las piezas del juego*/
 	/*
 	 * 0 - Seguro amarillo
@@ -19,11 +19,11 @@ public class Casillero {
 	 * además, las casillas seguras para todos son:
 	 * 4,5,6,7,8,9,10,11*/
 
-	public Casilla[] getCasillas() {
+	public List<Casilla> getCasillas() {
 		return casillas;
 	}
 
-	public void setCasillas(Casilla[] casillas) {
+	public void setCasillas(List<Casilla> casillas) {
 		this.casillas = casillas;
 	}
 
@@ -54,19 +54,19 @@ public class Casillero {
 		//casillas de salida
 		for (int i = 0; i < 12; i++)
 		{			
-			casillas[i] = new Casilla(true);
+			casillas.add(i, new Casilla(true));
 		}
 		//
 		for (int i = 12; i < 72; i++)
 		{
-			casillas[i] = new Casilla(false);
+			casillas.add(i, new Casilla(false));
 		}
 		//pasillo final
 		for (int i = 72; i < 104; i++)
 		{			
-			casillas[i] = new Casilla(true);
+			casillas.add(i, new Casilla(true));
 		}
-		casillas[104] = new Casilla(false);
+		casillas.add(104, new Casilla(false));
 	}
 	
 	/*0 - Casa amarilla
@@ -74,6 +74,56 @@ public class Casillero {
 	 * 2 - Casa roja
 	 * 3 - Casa verde
 	 */
+	
+	public void iniciarPosiciones()
+	{
+		/*
+		casillas.get(0).setPosicion(325, 164);
+		casillas.get(12).setPosicion(305, 164);
+		casillas.get(13).setPosicion(285, 164);
+		casillas.get(14).setPosicion(265, 164);
+		casillas.get(15).setPosicion(253, 151);		
+		casillas.get(16).setPosicion(253, 131);		
+		casillas.get(17).setPosicion(253, 111);
+		casillas.get(4).setPosicion(253, 91);
+		casillas.get(18).setPosicion(253, 71);
+		casillas.get(19).setPosicion(253, 51);		
+		casillas.get(20).setPosicion(253, 31);
+		casillas.get(21).setPosicion(253, 11);
+		casillas.get(5).setPosicion(207, 11);
+		casillas.get(22).setPosicion(161, 11);
+		casillas.get(23).setPosicion(161, 31);
+		casillas.get(24).setPosicion(161, 51);
+		casillas.get(25).setPosicion(161, 71);
+		casillas.get(1).setPosicion(161, 91);
+		casillas.get(26).setPosicion(161, 111);
+		casillas.get(27).setPosicion(161, 131);
+		casillas.get(28).setPosicion(161, 151);		
+		casillas.get(29).setPosicion(148, 164);
+		casillas.get(30).setPosicion(128, 164);
+		casillas.get(31).setPosicion(108, 164);
+		casillas.get(6).setPosicion(88, 164);		
+		casillas.get(32).setPosicion(68, 164);
+		casillas.get(33).setPosicion(48, 164);
+		casillas.get(34).setPosicion(28, 164);
+		casillas.get(35).setPosicion(8, 164);
+		casillas.get(7).setPosicion(8, 210);
+		casillas.get(36).setPosicion(8, 256);
+		casillas.get(37).setPosicion(28, 256);
+		casillas.get(38).setPosicion(48, 256);
+		casillas.get(39).setPosicion(68, 256);
+		casillas.get(3).setPosicion(88, 256);
+		*/
+		
+		/*
+		 casilla <--> 20
+		 x ---->
+		 y |
+		   v
+		 */
+		casillas.get(0).setPosicion(88, 256);
+	}
+	
 	public boolean esMiSeguro(int color, int casilla)
 	{
 		boolean result = false;
@@ -132,10 +182,10 @@ public class Casillero {
 			newPiezas.add((Pieza) piezas.get(i).clone());
 		}
 		
-		Casilla[] newCasillas = new Casilla[105];
-		for(int i = 0; i < casillas.length; i++)
+		List<Casilla> newCasillas = new ArrayList<Casilla>();
+		for(int i = 0; i < casillas.size(); i++)
 		{
-			newCasillas[i] = (Casilla) casillas[i].clone();
+			newCasillas.add(i, (Casilla) casillas.get(i).clone());
 		}
 		
 		newCasillero.setCasillas(newCasillas);

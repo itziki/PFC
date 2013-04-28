@@ -46,6 +46,7 @@ public class Tablero /*extends JApplet */{
 	public void iniciarTablero(int jugadorNumbers)
 	{
 		casillero.iniciarCasillero();
+		casillero.iniciarPosiciones();
 		for(int i = 0; i < jugadorNumbers; i++)
 		{
 			jugadores.add(new Jugador(i));

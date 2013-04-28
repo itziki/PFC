@@ -29,7 +29,7 @@ public class Jugador {
 	public Pieza selectPieza(Casillero casillero, int dado){
 		int rating = 0;
 		Pieza piezaElegida = null;
-		Casilla[] casillas = casillero.getCasillas();
+		List<Casilla> casillas = casillero.getCasillas();
 		List<Pieza> piezas = casillero.getPiezas();
 		List<Pieza> piezasEnCasilla = null;
 		/*regla a*/
@@ -42,14 +42,14 @@ public class Jugador {
 				int casillasPorDetras = casillaPieza - 7;
 				int reduccionPiezasAtacantes = 0;
 				int incrementoPiezasAtacadas = 0;
-				piezasEnCasilla = casillas[casillaPieza].getPiezas();
+				piezasEnCasilla = casillas.get(casillaPieza).getPiezas();
 				/*regla a.1: alcanzamos un seguro*/
-				if (casillas[casillaPieza + dado].isEsSegura())
+				if (casillas.get(casillaPieza + dado).isEsSegura())
 				{
 					rating += 10;
 				}
 				/*regla a.3: comemos pieza enemiga*/
-				else if (casillas[casillaPieza + dado].miPieza(colorPiezas).getColor() != colorPiezas)
+				else if (casillas.get(casillaPieza + dado).miPieza(colorPiezas).getColor() != colorPiezas)
 				{
 					rating += 30;
 				}
@@ -59,7 +59,7 @@ public class Jugador {
 					/*posición inicial*/
 					for (int j = casillaPieza; j < casillasPorDelante; j++)
 					{
-						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
+						Pieza otraPieza = casillas.get(j).miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							reduccionPiezasAtacantes++;
@@ -67,7 +67,7 @@ public class Jugador {
 					}
 					for (int j = casillaPieza; j < casillasPorDetras; j--)
 					{
-						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
+						Pieza otraPieza = casillas.get(j).miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							incrementoPiezasAtacadas++;
@@ -76,7 +76,7 @@ public class Jugador {
 					/*posicion final*/
 					for (int j = casillasPorDelante; j < casillasPorDelante + 7; j++)
 					{
-						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
+						Pieza otraPieza = casillas.get(j).miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							reduccionPiezasAtacantes++;
@@ -84,7 +84,7 @@ public class Jugador {
 					}
 					for (int j = casillasPorDelante; j < casillaPieza; j--)
 					{
-						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
+						Pieza otraPieza = casillas.get(j).miPieza(colorPiezas);
 						if (otraPieza.getColor() != this.colorPiezas)
 						{
 							incrementoPiezasAtacadas++;
@@ -94,12 +94,12 @@ public class Jugador {
 					rating += (3 * incrementoPiezasAtacadas) + (9 * reduccionPiezasAtacantes);
 				}
 				/*regla b*/
-				if((casillas[casillaPieza].isEsSegura()) || (casillero.esMiSeguro(colorPiezas, casillaPieza)))
+				if((casillas.get(casillaPieza).isEsSegura()) || (casillero.esMiSeguro(colorPiezas, casillaPieza)))
 				{
 					rating -= 5;
 					for(int j = casillaPieza; j < casillasPorDetras; j--)
 					{
-						Pieza otraPieza = casillas[j].miPieza(colorPiezas);
+						Pieza otraPieza = casillas.get(j).miPieza(colorPiezas);
 						if (otraPieza.getColor()!= this.colorPiezas)
 						{
 							rating -= 9;

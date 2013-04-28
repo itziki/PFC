@@ -3,7 +3,6 @@ package minimaxAlgorithm;
 import java.util.ArrayList;
 import java.util.List;
 
-import parchis.Casillero;
 import parchis.Partida;
 import parchis.Pieza;
 import parchis.Tablero;
@@ -50,10 +49,11 @@ public class ParchisProblem extends Problem {
 			switch(i)
 			{
 				case 0:
-					for(int k = 0; k < 4; k++)
+					for(int k = 0; k < /*4*/3; k++)
 					{
 						piezas.add(new Pieza(0, 0, 104));
 					}
+					piezas.add(new Pieza(0,0,0));
 					break;
 				case 1:
 					for(int k = 0; k < 4; k++)
