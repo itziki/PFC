@@ -67,6 +67,8 @@ public class Casillero {
 			casillas.add(i, new Casilla(true));
 		}
 		casillas.add(104, new Casilla(false));
+		
+		this.iniciarPosiciones();
 	}
 	
 	/*0 - Casa amarilla
@@ -77,7 +79,13 @@ public class Casillero {
 	
 	public void iniciarPosiciones()
 	{
-		/*
+/*
+		 casilla <--> 20
+		 x ---->
+		 y |
+		   v
+ */
+		
 		casillas.get(0).setPosicion(325, 164);
 		casillas.get(12).setPosicion(305, 164);
 		casillas.get(13).setPosicion(285, 164);
@@ -112,16 +120,85 @@ public class Casillero {
 		casillas.get(37).setPosicion(28, 256);
 		casillas.get(38).setPosicion(48, 256);
 		casillas.get(39).setPosicion(68, 256);
-		casillas.get(3).setPosicion(88, 256);
-		*/
+		casillas.get(3).setPosicion(88, 256);		
+		casillas.get(40).setPosicion(108, 256);
+		casillas.get(41).setPosicion(128, 256);
+		casillas.get(42).setPosicion(148, 256);
+		casillas.get(43).setPosicion(161, 269);
+		casillas.get(44).setPosicion(161, 289);
+		casillas.get(45).setPosicion(161, 309);
+		casillas.get(8).setPosicion(161, 329);
+		casillas.get(46).setPosicion(161, 349);
+		casillas.get(47).setPosicion(161, 369);
+		casillas.get(48).setPosicion(161, 389);
+		casillas.get(49).setPosicion(161, 409);
+		casillas.get(9).setPosicion(207, 409);
+		casillas.get(50).setPosicion(253, 409);
+		casillas.get(51).setPosicion(253, 389);
+		casillas.get(52).setPosicion(253, 369);
+		casillas.get(53).setPosicion(253, 349);
+		casillas.get(3).setPosicion(253, 329);
+		casillas.get(54).setPosicion(253, 309);
+		casillas.get(55).setPosicion(253, 289);
+		casillas.get(56).setPosicion(253, 269);
+		casillas.get(57).setPosicion(266, 256);
+		casillas.get(58).setPosicion(286, 256);
+		casillas.get(59).setPosicion(306, 256);
+		casillas.get(10).setPosicion(326, 256);
+		casillas.get(60).setPosicion(346, 256);
+		casillas.get(61).setPosicion(366, 256);
+		casillas.get(62).setPosicion(386, 256);
+		casillas.get(63).setPosicion(406, 256);
+		casillas.get(11).setPosicion(406, 210);
+		casillas.get(64).setPosicion(406, 164);
+		casillas.get(65).setPosicion(386, 164);		
+		casillas.get(66).setPosicion(366, 164);
+		casillas.get(67).setPosicion(346, 164);
+			
+		//pasillo amarillo - 72..79
+				 
+		casillas.get(72).setPosicion(386, 210);
+		casillas.get(73).setPosicion(366, 210);
+		casillas.get(74).setPosicion(346, 210);
+		casillas.get(75).setPosicion(326, 210);
+		casillas.get(76).setPosicion(306, 210);
+		casillas.get(77).setPosicion(286, 210);
+		casillas.get(78).setPosicion(266, 210);
+		casillas.get(79).setPosicion(240, 210); //casilla final
+		 
+		//pasillo azul - 80..87
 		
-		/*
-		 casilla <--> 20
-		 x ---->
-		 y |
-		   v
-		 */
-		casillas.get(0).setPosicion(88, 256);
+		casillas.get(80).setPosicion(207, 30);
+		casillas.get(81).setPosicion(207, 50);
+		casillas.get(82).setPosicion(207, 70);
+		casillas.get(83).setPosicion(207, 90);
+		casillas.get(84).setPosicion(207, 110);
+		casillas.get(85).setPosicion(207, 130);
+		casillas.get(86).setPosicion(207, 150);
+		casillas.get(87).setPosicion(207, 176); //casilla final
+		
+		//pasillo rojo - 88..95
+		
+		casillas.get(88).setPosicion(28, 210);
+		casillas.get(89).setPosicion(48, 210);
+		casillas.get(90).setPosicion(68, 210);
+		casillas.get(91).setPosicion(88, 210);
+		casillas.get(92).setPosicion(108, 210);
+		casillas.get(93).setPosicion(128, 210);
+		casillas.get(94).setPosicion(148, 210);
+		casillas.get(95).setPosicion(171, 210); //casilla final
+		
+		 //pasillo verde - 96..103
+		
+		casillas.get(96).setPosicion(207, 389);
+		casillas.get(97).setPosicion(207, 369);
+		casillas.get(98).setPosicion(207, 349);
+		casillas.get(99).setPosicion(207, 329);
+		casillas.get(100).setPosicion(207, 309);
+		casillas.get(101).setPosicion(207, 289);
+		casillas.get(102).setPosicion(207, 269);
+		casillas.get(103).setPosicion(207, 246); //casilla final
+				
 	}
 	
 	public boolean esMiSeguro(int color, int casilla)

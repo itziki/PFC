@@ -29,34 +29,42 @@ public class MainProgram
 		}
 	    System.out.println(s);
 		int players = Integer.parseInt(s); */
-		int players = 4;
+		int players = 2;
 		int jugadas = 2;
 		try
 		{		
-			ParchisProblem problem = new ParchisProblem(players);
+			ParchisProblem problem = ParchisProblem.getInstance(players);
 			State state = problem.getCurrentState();
 			TableroGraphics tableroGraphics = new TableroGraphics(state.getPartida());
+			tableroGraphics.draw();
 			int player = problem.getCurrentState().getPlayer();
-			//while(problem.isFinalState(problem.getCurrentState()))
+			while(jugadas > 0)
 			{
+				player = problem.getCurrentState().getPlayer();
 				if(player == 0)
-				{
-					player = problem.getCurrentState().getPlayer();
-					problem.getBestMovement(players);
+				{					
+					State bestMovement = problem.getBestMovement(players);
+					problem.setCurrentState(bestMovement);
+					
+					try {
+					    Thread.sleep(1000);
+					} catch(InterruptedException ex) {
+					    Thread.currentThread().interrupt();
+					}
+					
 					System.out.println("player: " + player);
 				}
 				else
-				{	
-					if(jugadas != 0 )
-					{
-						player = 0;
-						jugadas--;
-					}
+				{
 					//player = 0;
+					System.out.println("player: " + player);
+					
 				}
-
+				jugadas--;
+				tableroGraphics.setVariables(problem.getCurrentState().getPartida());
 				tableroGraphics.draw();
 			}
+			System.out.println("game over");
 			/*while (!(problem.isFinalState(problem.getCurrentState())))
 			{
 				switch(player)

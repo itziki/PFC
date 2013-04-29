@@ -44,7 +44,7 @@ public class MinimaxAlgorithm {
 	*/	
 	public Node Minimax(Problem problem, int dice, Node node)
 	{		
-		System.out.println("minimax");
+		//System.out.println("minimax");
 		//String action = null;
 		Node successor = null;
 		
@@ -52,7 +52,7 @@ public class MinimaxAlgorithm {
 		maxMinimaxValue = -100;
 		
 		successorFinalNodes = new ArrayList<Node>();
-		successorFinalNodes.add(node);
+		//successorFinalNodes.add(node);
 		int minimaxValue = MaxValue(problem, dice, node);
 		boolean bestSuccessorFound = false;
 		
@@ -317,12 +317,12 @@ public class MinimaxAlgorithm {
 						//Insert current successor State to the list of generated states
 						generatedStates.add(successorState);	
 						successorFinalNodes.add(successorNode);
-						State state = successorNode.getState();
-						Partida partida = (Partida)state.getPartida();
-						System.out.println(partida.getTablero().getCasillero().getPiezas().get(0).getCasilla());
-						System.out.println(partida.getTablero().getCasillero().getPiezas().get(1).getCasilla());
-						System.out.println(partida.getTablero().getCasillero().getPiezas().get(2).getCasilla());
-						System.out.println(partida.getTablero().getCasillero().getPiezas().get(3).getCasilla());
+						//State state = successorNode.getState();
+						//Partida partida = (Partida)state.getPartida();
+						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(0).getCasilla());
+						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(1).getCasilla());
+						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(2).getCasilla());
+						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(3).getCasilla());
 						//System.out.println(successorNode.getDepth() + ": " + successorNode.getState().getRating());
 						//System.out.print(successorNode.getDepth() + ", ");
 					}

@@ -68,46 +68,7 @@ public class Tablero /*extends JApplet */{
 		tableroCloned.setDado(dado);
 		return tableroCloned;		
 	}
-	
-	/*public void init(){
-		principal = new JPanel();
-		fichaPanel = new JPanel();
-		ImageLabel label = new ImageLabel(new ImageIcon("D:/PFC/pictures/tablero.png"));
-		ImageLabel ficha = new ImageLabel(new ImageIcon("D:/PFC/pictures/ficha_roja.png"));
-		ficha.setLocation(29, 37);
-		label.setLocation(29, 37);
-		principal.add(label);
-		fichaPanel.add(ficha);
-		principal.add(fichaPanel);
-		
-		frame = new JFrame();
-		frame.getContentPane().add(principal);
-		frame.pack();
-		frame.setVisible(true);
-		//p = new Panel();
-		
-		//JLabel picLabel = new JLabel(new ImageIcon(img));
-		//principal.add(picLabel);
-		//principal.repaint(); 
-		//p.setBackground(Color.black);
-		//p.setLayout(new GridLayout(3,3,10,10));
-	}
-	
-	/* public void ImagePanel() {
-		 try
-			{
-			    img = ImageIO.read(new File("Tablero_parchis.png"));
-			}
-			catch (IOException e)
-			{
-			}
-	    }
-	
-	@Override
-	public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-        g.drawImage(img, 0, 0, null); // see javadoc for more info on the parameters            
-    }*/
+
 	public Dado getDado() {
 		return dado;
 	}

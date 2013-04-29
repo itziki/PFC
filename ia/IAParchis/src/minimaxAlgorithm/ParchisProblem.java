@@ -14,6 +14,7 @@ import formulation.Problem;
 import formulation.State;
 
 public class ParchisProblem extends Problem {
+	private static ParchisProblem instance = null;
 	
 	/*
 	 * 0 - Casa amarilla
@@ -28,7 +29,16 @@ public class ParchisProblem extends Problem {
 	 * además, las casillas seguras para todos son:
 	 * 4,5,6,7,8,9,10,11*/
 	
-	public ParchisProblem(int playerNumber)
+	public static ParchisProblem getInstance(int playerNumber)
+	{
+		if (instance == null) {
+			instance = new ParchisProblem(playerNumber);
+		}
+		
+		return instance;
+	}
+	
+	private ParchisProblem(int playerNumber)
 	{
 		this.createInitialState(playerNumber);
 		this.createFinalState(playerNumber);
@@ -49,11 +59,10 @@ public class ParchisProblem extends Problem {
 			switch(i)
 			{
 				case 0:
-					for(int k = 0; k < /*4*/3; k++)
+					for(int k = 0; k < 4; k++)
 					{
 						piezas.add(new Pieza(0, 0, 104));
 					}
-					piezas.add(new Pieza(0,0,0));
 					break;
 				case 1:
 					for(int k = 0; k < 4; k++)
@@ -142,24 +151,25 @@ public class ParchisProblem extends Problem {
 		this.addFinalState(finalState);
 	}
 	
-	public void getBestMovement(int playerNumber)
+	public State getBestMovement(int playerNumber)
 	{
 		int player = this.getCurrentState().getPlayer();
 		//MIN is playing
-		if(this.getCurrentState().getPlayer() == 1)
+		//if(this.getCurrentState().getPlayer() == 1)
 		{
 			MinimaxAlgorithm minimaxAlgorithm = MinimaxAlgorithm.getInstance();
-			System.out.println(this.getCurrentState().getPartida().getTablero().getCasillero().getPiezas().size());
-			Node node = new Node(this.getCurrentState().clone("player_" + player));
-			System.out.println("llamamos minimax");
+			//System.out.println(this.getCurrentState().getPartida().getTablero().getCasillero().getPiezas().size());
+			Node node = new Node(this.getCurrentState());
+			//System.out.println("llamamos minimax");
 			Node bestMovement = minimaxAlgorithm.Minimax(this, 5, node);
-			System.out.println(bestMovement.getState().getRating());
-			this.setCurrentState(bestMovement.getState());
+			//System.out.println(bestMovement.getState().getRating());
+			return bestMovement.getState();
+			//this.setCurrentState(bestMovement.getState());
 			//System.out.println("Selected node's value 1: " + bestMovement.getState().getRating());
 		}
 		//MAX is playing
 		//change the player
-		if(player == (playerNumber - 1))
+	/*	if(player == (playerNumber - 1))
 		{
 			System.out.println("if 1");
 			this.getCurrentState().setPlayer(0);
@@ -168,7 +178,7 @@ public class ParchisProblem extends Problem {
 		{
 			System.out.println("if 2");
 			this.getCurrentState().setPlayer(player + 1);
-		}
+		}*/
 	}
 
 	protected void createActions()
