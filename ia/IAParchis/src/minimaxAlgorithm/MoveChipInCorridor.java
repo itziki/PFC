@@ -1,27 +1,38 @@
 package minimaxAlgorithm;
 
+import java.util.List;
+
 import parchis.Partida;
 import parchis.Pieza;
 import formulation.Action;
 import formulation.State;
 
 public class MoveChipInCorridor extends Action {
+	private int numeroFicha = 0;
 
-	public MoveChipInCorridor(String name) {
+	public MoveChipInCorridor(String name, int numeroFicha) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		this.numeroFicha = numeroFicha;
 	}
 
 	@Override
 	protected State effect(State state, int dice)
 	{
 		Partida currentPartida = (Partida)state.getPartida();
-		Pieza piezaSelect = (Pieza)state.getPieza();
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
+		int nuevaCasilla = piezaSelec.getCasilla() + dice;
 		
 		//la ficha se mueve dentro del pasillo
-		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
-		State newState = new State(currentPartida);
-		newState.setRating(1);
+		piezaSelec.setCasilla(nuevaCasilla);
+		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		
+		State newState = new State("move_chip_in_corridor");
+		newState.setPartida(currentPartida);
+		newState.setPieza(piezaSelec);
+		double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 1);
+		newState.setRating(y);
 		
 		return newState;
 	}
@@ -30,32 +41,34 @@ public class MoveChipInCorridor extends Action {
 	protected boolean isApplicable(State state, int dice)
 	{
 		boolean isApplicable = false;
-		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
+		Partida currentPartida = (Partida)state.getPartida();
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
 		//si la ficha está en el pasillo
 		switch (piezaSelec.getColor())
 		{
 		case 0:		
-			if((casilla >= 72) && (casilla <= 79))
+			if((casilla >= 69) && (casilla <= 76))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 1:
-			if((casilla >= 80) && (casilla <= 89))
+			if((casilla >= 77) && (casilla <= 84))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 2:
-			if((casilla >= 88) && (casilla <= 95))
+			if((casilla >= 85) && (casilla <= 92))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 3:
-			if((casilla >= 93) && (casilla <= 103))
+			if((casilla >= 93) && (casilla <= 100))
 			{
 				isApplicable = true;
 			}
@@ -70,25 +83,25 @@ public class MoveChipInCorridor extends Action {
 		switch (piezaSelec.getColor())
 		{
 		case 0:		
-			if((nuevaCasilla >= 72) && (nuevaCasilla <= 79))
+			if((nuevaCasilla >= 69) && (nuevaCasilla <= 76))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 1:
-			if((nuevaCasilla >= 80) && (nuevaCasilla <= 89))
+			if((nuevaCasilla >= 77) && (nuevaCasilla <= 84))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 2:
-			if((nuevaCasilla >= 88) && (nuevaCasilla <= 95))
+			if((nuevaCasilla >= 85) && (nuevaCasilla <= 92))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 3:
-			if((nuevaCasilla >= 93) && (nuevaCasilla <= 103))
+			if((nuevaCasilla >= 93) && (nuevaCasilla <= 100))
 			{
 				isApplicable = true;
 			}

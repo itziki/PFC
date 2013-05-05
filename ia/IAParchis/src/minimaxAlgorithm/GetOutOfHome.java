@@ -25,11 +25,29 @@ public class GetOutOfHome extends Action {
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
 		Casillero casillero = currentPartida.getTablero().getCasillero();
 		
+		int casillaSalida = 0;
+		
+		switch(currentPartida.getColorJugador())
+		{
+			case 0:
+				casillaSalida = 5;
+				break;
+			case 1:
+				casillaSalida = 22;
+				break;
+			case 2:
+				casillaSalida = 39;
+				break;
+			case 3:
+				casillaSalida = 56;
+				break;
+		}
+		
 		//La ficha sale y se queda en la casilla de salida
-		piezaSelec.setCasilla(currentPartida.getColorJugador());
+		piezaSelec.setCasilla(casillaSalida);
 		
 		//Si hay dos fichas de otro color en la casilla se come la última que ha llegado
-		List<Pieza> piezas = casillero.getCasillas().get(currentPartida.getColorJugador()).getPiezas();
+		List<Pieza> piezas = casillero.getCasillas().get(casillaSalida).getPiezas();
 			//piezas->piezas de la casilla de salida
 		if (piezas.size() == 2)
 		{
@@ -46,11 +64,15 @@ public class GetOutOfHome extends Action {
 			}
 		}
 		
-		currentPartida.getTablero().getCasillero().getCasillas().get(currentPartida.getColorJugador()).setPiezas(piezas);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casillaSalida).setPiezas(piezas);
 		State newState = new State("get_out_of_home");
 		newState.setPartida(currentPartida);
+		piezaSelec.setRecorrido(1);
 		newState.setPieza(piezaSelec);
-		newState.setRating(6);
+		//generate rating
+		double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 5);
+		newState.setRating(10);
 		
 		return newState;
 	}
@@ -68,67 +90,48 @@ public class GetOutOfHome extends Action {
 		int casilla = piezaSelec.getCasilla();
 		
 		//Si la ficha está en casa
-		if(piezaSelec.getCasilla() == 104)
+		if(piezaSelec.getCasilla() == 101)
 		{
-			isApplicable = true;
+			//Si el dado ha sacado 5
+			if(dice == 5)
+			{
+				//Si no tengo barrera de mi color en la casilla de salida
+				switch (piezaSelec.getColor())
+				{
+				case 0:		
+					if(!(casillero.getCasillas().get(5).getPiezas().size() == 2))
+					{
+						isApplicable = true;
+					}
+					
+					break;
+				case 1:
+					if(!(casillero.getCasillas().get(22).getPiezas().size() == 2))
+					{
+						isApplicable = true;
+					}
+					break;
+				case 2:
+					if(!(casillero.getCasillas().get(39).getPiezas().size() == 2))
+					{
+						isApplicable = true;
+					}
+					break;
+				case 3:
+					if(!(casillero.getCasillas().get(56).getPiezas().size() == 2))
+					{
+						isApplicable = true;
+					}					
+					break;
+				default:
+						isApplicable = false;
+				};
+			}
 		}
 		else
 		{
 			isApplicable = false;
 		}
-		
-		//Si el dado ha sacado 5
-		if(dice == 5)
-		{
-			isApplicable = true;
-		}
-		else
-		{
-			isApplicable = false;
-		}
-		
-		//Si no tengo barrera de mi color en la casilla de salida
-		switch (piezaSelec.getColor())
-		{
-		case 0:		
-			if(casilla == 0)
-			{
-				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
-				{
-					isApplicable = true;
-				}
-			}
-			break;
-		case 1:
-			if(casilla == 1)
-			{
-				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
-				{
-					isApplicable = true;
-				}
-			}
-			break;
-		case 2:
-			if(casilla == 2)
-			{
-				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
-				{
-					isApplicable = true;
-				}
-			}
-			break;
-		case 3:
-			if(casilla == 3)
-			{
-				if(!(casillero.getCasillas().get(casilla).getPiezas().size() == 2))
-				{
-					isApplicable = true;
-				}
-			}
-			break;
-		default:
-				isApplicable = false;
-		};
 		
 		
 		/*

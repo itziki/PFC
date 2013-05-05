@@ -1,5 +1,8 @@
 package parchis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Partida {
 	private Tablero tablero;

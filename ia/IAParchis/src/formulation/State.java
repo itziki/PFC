@@ -9,7 +9,7 @@ public class State {
 	private Pieza pieza; //pieza que se va a mover
 	private Partida partida;
 	//the rating value
-	private int rating;
+	private double rating;
 	private int player; //0-> MAX; 1->MIN
 	
 	public State (Object information)
@@ -35,14 +35,14 @@ public class State {
 		this.partida = partida;
 	}
 
-	public int getRating()
+	public double getRating()
 	{
 		return rating;
 	}
 
-	public void setRating(int rating)
+	public void setRating(double d)
 	{
-		this.rating = rating;
+		this.rating = d;
 	}
 
 	public int getPlayer()

@@ -20,10 +20,12 @@ import java.util.List;
  */
 public class Jugador {
 	private int colorPiezas;/*0- amarillo; 1-azul; 2-rojo; 3-verde*/
+	private boolean cpu = false;
 	
-	public Jugador(int colorPiezas)
+	public Jugador(int colorPiezas, boolean cpu)
 	{
 		this.colorPiezas = colorPiezas;
+		this.cpu = cpu;
 	}
 	
 	public Pieza selectPieza(Casillero casillero, int dado){
@@ -119,6 +121,15 @@ public class Jugador {
 			
 		return piezaElegida;		
 	}
+	
+	public boolean isCpu() {
+		return cpu;
+	}
+
+	public void setCpu(boolean cpu) {
+		this.cpu = cpu;
+	}
+
 	public int getColorPiezas() {
 		return colorPiezas;
 	}
@@ -128,7 +139,7 @@ public class Jugador {
 	
 	public Jugador clone()
 	{
-		Jugador newJugador = new Jugador(this.colorPiezas);
+		Jugador newJugador = new Jugador(this.colorPiezas, this.cpu);
 		return newJugador;
 	}
 }

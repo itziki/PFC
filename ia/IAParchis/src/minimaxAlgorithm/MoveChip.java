@@ -12,23 +12,37 @@ import formulation.State;
 
 public class MoveChip extends Action {
 	
+	private int numeroFicha = 0;	
 	
-	public MoveChip(String name) {
+	public MoveChip(String name, int numeroFicha) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		this.numeroFicha = numeroFicha;
 	}
 
 	@Override
 	protected State effect(State state, int dice) {
-		//La ficha se mueve hacia delante el número de casillas correspondiente
+		
 		Partida currentPartida = (Partida)state.getPartida();
-		Pieza piezaSelect = (Pieza)state.getPieza();
-		int nuevaCasilla = piezaSelect.getCasilla() + dice;
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
+		int nuevaCasilla = piezaSelec.getCasilla() + dice;
 		Casillero casillero = currentPartida.getTablero().getCasillero();
-		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelect);
+		
+		//La ficha se mueve hacia delante el número de casillas correspondiente
+		piezaSelec.setCasilla(nuevaCasilla);
+		piezaSelec.setRecorrido(piezaSelec.getCasilla() + dice);
+		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
 		currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
-		State newState = new State(currentPartida);
-		newState.setRating(1);
+		
+		State newState = new State("move_chip");
+		newState.setPartida(currentPartida);
+		newState.setPieza(piezaSelec);
+		
+		//generate rating
+		double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 10);
+		newState.setRating(6);
 		
 		return newState;
 	}
@@ -42,7 +56,8 @@ public class MoveChip extends Action {
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
 		List<Casilla> casillas = casillero.getCasillas();
-		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
 		//Si la ficha no está en el pasillo final y Si la ficha no está en la casilla final	
@@ -50,25 +65,25 @@ public class MoveChip extends Action {
 		//miro si la ficha está en su pasillo
 		{
 		case 0:		
-			if(!(casilla >= 72 && casilla <= 79))
+			if(!(casilla >= 69 && casilla <= 76))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 1:
-			if(!(casilla >= 80 && casilla <= 89))
+			if(!(casilla >= 77 && casilla <= 84))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 2:
-			if(!(casilla >= 88 && casilla <= 95))
+			if(!(casilla >= 85 && casilla <= 92))
 			{
 				isApplicable = true;
 			}
 			break;
 		case 3:
-			if(!(casilla >= 93 && casilla <= 103))
+			if(!(casilla >= 93 && casilla <= 100))
 			{
 				isApplicable = true;
 			}
@@ -77,29 +92,30 @@ public class MoveChip extends Action {
 				isApplicable = false;
 		};
 		
-		//Si no hay barreras de otro color en la distancia a recorrer.
-		for (int i = casilla; i <= casilla + dice; i++)
-		{
-			if (!(casillas.get(i).getPiezas().size() == 2))
-			{
-				isApplicable = true;
-			}
-			else
-			{
-				isApplicable = false;
-			}
-		}
-		
 		//Si la ficha está fuera de casa
-		if(!(piezaSelec.getCasilla() == 104)) //la casilla 104 no existe, por lo que la ficha esta en casa sin salir aun
+		if(piezaSelec.getCasilla() != 101) //la casilla 101 no existe, por lo que la ficha esta en casa sin salir aun
 		{
-			isApplicable = true;
+			//isApplicable = true;
+			//Si no hay barreras de otro color en la distancia a recorrer.
+			for (int i = casilla; i <= casilla + dice; i++)
+			{
+				//System.out.println(i);
+				if (!(casillas.get(i).getPiezas().size() == 2))
+				{
+					isApplicable = true;
+				}
+				else
+				{
+					isApplicable = false;
+				}
+			}
 		}
 		else
 		{
 			isApplicable = false;
 		}
 		
+		//System.out.println(isApplicable+ ", " + casilla + ", " + piezaSelec.getColor());
 		return isApplicable;
 	}
 

@@ -1,29 +1,13 @@
 package parchis;
 
-//import java.awt.Graphics;
-//import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.imageio.ImageIO;
-//import javax.swing.ImageIcon;
-//import javax.swing.JApplet;
-//import javax.swing.JFrame;
-//import javax.swing.JPanel;
 
-public class Tablero /*extends JApplet */{
+public class Tablero {
 	private Casillero casillero = new Casillero();
 	private List<Jugador> jugadores = new ArrayList<Jugador>(); /*0- amarillo; 1-azul; 2-rojo; 3-verde*/
 	private Dado dado = new Dado();//null
-	/*JPanel principal;
-	JPanel fichaPanel;
-	JFrame frame;
-	BufferedImage img = null;
-	Graphics g;*/
-	
-	private static final long serialVersionUID = 1L;
 	
 	public Tablero()
 	{
@@ -43,13 +27,13 @@ public class Tablero /*extends JApplet */{
 		this.jugadores = jugador;
 	}
 	
-	public void iniciarTablero(int jugadorNumbers)
+	public void iniciarTablero(int jugadorNumbers, List<Boolean> cpu)
 	{
 		casillero.iniciarCasillero();
 		casillero.iniciarPosiciones();
 		for(int i = 0; i < jugadorNumbers; i++)
 		{
-			jugadores.add(new Jugador(i));
+			jugadores.add( new Jugador(i, cpu.get(i)));
 		}
 	}
 	

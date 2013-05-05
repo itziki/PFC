@@ -24,8 +24,8 @@ public class JumpABarrier extends Action {
 		Pieza piezaSelect = (Pieza)state.getPieza();
 		
 		//la ficha se mueve
-		System.out.println(piezaSelect.getCasilla() + dice);
-		System.out.println(piezaSelect.getCasilla());
+		//System.out.println(piezaSelect.getCasilla() + dice);
+		//System.out.println(piezaSelect.getCasilla());
 		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).getPiezas().get(0).setCasilla(piezaSelect.getCasilla() + dice);
 
 		State newState = new State(currentPartida);
@@ -57,7 +57,7 @@ public class JumpABarrier extends Action {
 		}
 		
 		//si con el movimiento no se queda en la casilla de la barrera
-		System.out.println((casillas.get(casilla + dice).getPiezas().size()));
+		//System.out.println((casillas.get(casilla + dice).getPiezas().size()));
 		if((casillas.get(casilla + dice).getPiezas().size() == 2))
 		{
 			isApplicable = false;

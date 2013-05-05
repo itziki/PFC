@@ -1,5 +1,7 @@
 package minimaxAlgorithm;
 
+import java.util.List;
+
 import parchis.Casilla;
 import parchis.Casillero;
 import parchis.Partida;
@@ -9,22 +11,33 @@ import formulation.Action;
 import formulation.State;
 
 public class MakeABarrier extends Action {
+	private int numeroFicha = 0;
 
-	public MakeABarrier(String name) {
+	public MakeABarrier(String name, int numeroFicha) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		this.numeroFicha = numeroFicha;
 	}
 
 	@Override
 	protected State effect(State state, int dice) {
 		
 		Partida currentPartida = (Partida)state.getPartida();
-		Pieza piezaSelect = (Pieza)state.getPieza();
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
+		int casilla = piezaSelec.getCasilla();
 		
 		//Las fichas que no sean del color de la barrera no pueden pasar -> se meten las dos fichas en la casilla
-		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelect.getCasilla()).addPiezaToCasilla(piezaSelect);
-		State newState = new State(currentPartida);
-		newState.setRating(5);	
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).addPiezaToCasilla(piezaSelec);
+		piezaSelec.setCasilla(casilla + dice);
+		piezaSelec.setRecorrido(casilla + dice);
+		
+		State newState = new State("make_a_barrier");
+		newState.setPartida(currentPartida);
+		newState.setPieza(piezaSelec);
+		
+		double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 5);
+		newState.setRating(y);	
 		
 		return newState;
 	}
@@ -37,55 +50,81 @@ public class MakeABarrier extends Action {
 		Partida currentPartida = (Partida)state.getPartida();
 		Tablero tablero = currentPartida.getTablero();
 		Casillero casillero = tablero.getCasillero();
-		Pieza piezaSelec = (Pieza)state.getPieza(); //la pieza que se va a mover
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
-		//Si en la última casilla del movimiento que toque hay SÓLO una ficha de nuestro color
+		
 		int numeroNuevaCasilla = casilla + dice;
-		Casilla nuevaCasilla = casillero.getCasillas().get(numeroNuevaCasilla);
-		if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
+		//System.out.println(numeroNuevaCasilla);		
+		
+		//Si la ficha está fuera de casa
+		if((casilla > 0) && (casilla < 100))
 		{
-			if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color
-			{
-				isApplicable = true;
-			}
-			else
-			{
-				isApplicable = false;
-			}
-			
+			Casilla nuevaCasilla = casillero.getCasillas().get(numeroNuevaCasilla);
+			//System.out.println(nuevaCasilla.getPiezas().size());
 			//Si la ficha no está en la casilla final
 			switch (piezaSelec.getColor())
 			{
 			case 0:		
-				if(casilla != 79)
+				if(casilla != 76)
 				{
-					isApplicable = true;
+					//Si en la última casilla del movimiento que toque hay SÓLO una ficha de nuestro color
+					
+					if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
+					{
+						if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color
+						{
+							isApplicable = true;
+						}
+					}
 				}
 				break;
 			case 1:
-				if(casilla != 89)
+				if(casilla != 84)
 				{
-					isApplicable = true;
+					if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
+					{
+						if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color
+						{
+							isApplicable = true;
+						}
+					}
 				}
 				break;
 			case 2:
-				if(casilla != 95)
+				if(casilla != 93)
 				{
-					isApplicable = true;
+					if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
+					{
+						if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color
+						{
+							isApplicable = true;
+						}
+					}
 				}
 				break;
 			case 3:
-				if(casilla != 103)
+				if(casilla != 100)
 				{
-					isApplicable = true;
+					if(nuevaCasilla.getPiezas().size() == 1) //sólo una ficha
+					{
+						if(nuevaCasilla.getPiezas().get(0).getColor() == currentPartida.getColorJugador()) //es de nuestro color
+						{
+							isApplicable = true;
+						}
+					}
 				}
 				break;
 			default:
 					isApplicable = false;
 			};
 		}
-		
+		else
+		{
+			isApplicable = false;
+		}
+		//System.out.println(isApplicable);
 		
 		return isApplicable;
 	}
