@@ -162,14 +162,13 @@ public class ParchisProblem extends Problem {
 			Node node = new Node(this.getCurrentState());
 			//System.out.println("llamamos minimax");
 			int dado = this.getCurrentState().getPartida().getTablero().getDado().throwDice();
-			System.out.println(player + " --> " +"dado: " + dado);
 			Node bestMovement = minimaxAlgorithm.Minimax(this, dado, node);
 			//System.out.println(bestMovement.getState().getRating());
 			State returnedState = null;
 			if(bestMovement != null)
 			{
 				returnedState = bestMovement.getState();
-				System.out.println(player + " --> " + dado + ", "+bestMovement.getState().getRating() + ", " + bestMovement.getAction());
+				System.out.println(player + " --> " + dado + ", " + bestMovement.getState().getRating()+ ", " + bestMovement.getAction());
 			}
 			else
 			{
@@ -209,7 +208,6 @@ public class ParchisProblem extends Problem {
 		actionList.add(new MoveChip("MoveChip_3", 3));
 		actionList.add(new MoveChip("MoveChip_4", 4));
 		
-		/*
 		actionList.add(new DestroyABarrier("DestroyABarrier_1", 1));
 		actionList.add(new DestroyABarrier("DestroyABarrier_2", 2));
 		actionList.add(new DestroyABarrier("DestroyABarrier_3", 3));
@@ -244,7 +242,7 @@ public class ParchisProblem extends Problem {
 		actionList.add(new ReturnChipToHome("ReturnChipToHome_2", 2));
 		actionList.add(new ReturnChipToHome("ReturnChipToHome_3", 3));
 		actionList.add(new ReturnChipToHome("ReturnChipToHome_4", 4));
-		*/
+		/**/
 		
 		this.addActions(actionList);		
 	}

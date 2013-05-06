@@ -210,7 +210,7 @@ public class TableroGraphics extends JPanel{
 		posiciones.add(56, new Point(253, 329)); //56
 		posiciones.add(57, new Point(253, 309));//57
 		posiciones.add(58, new Point(253, 289));//58
-		posiciones.add(50, new Point(253, 269));//59
+		posiciones.add(59, new Point(253, 269));//59
 		posiciones.add(60, new Point(266, 256));//60
 		posiciones.add(61, new Point(286, 256));//61
 		posiciones.add(62, new Point(306, 256));//62

@@ -29,15 +29,15 @@ public class MakeABarrier extends Action {
 		//Las fichas que no sean del color de la barrera no pueden pasar -> se meten las dos fichas en la casilla
 		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).addPiezaToCasilla(piezaSelec);
 		piezaSelec.setCasilla(casilla + dice);
-		piezaSelec.setRecorrido(casilla + dice);
+		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		
 		State newState = new State("make_a_barrier");
 		newState.setPartida(currentPartida);
 		newState.setPieza(piezaSelec);
 		
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 5);
-		newState.setRating(y);	
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 5);*/
+		newState.setRating(3);	
 		
 		return newState;
 	}

@@ -184,7 +184,7 @@ public class MinimaxAlgorithm {
 					double minValue = MinValue(problem, dice, successor);
 					//System.out.println(successor.getDepth() + ": " + minValue);
 					//si el valor del sucesor es mayor que el valor que ya tiene se actualiza
-					minimaxValue = node.getState().getRating();
+					//minimaxValue = node.getState().getRating();
 					if (minimaxValue < minValue)
 					{
 						minimaxValue = minValue;
@@ -237,7 +237,7 @@ public class MinimaxAlgorithm {
 					Node successor = successors.get(i);
 					//minimaxValue = MIN(minimaxValue, MaxValue(problem, dice, successor));
 					double maxValue = MaxValue(problem, dice, successor);
-					minimaxValue = node.getState().getRating();
+					//minimaxValue = node.getState().getRating();
 					if (maxValue < minimaxValue)//aqui habría que borrar el valor que tenga el nodo la primera vez que se pasa
 					{
 						minimaxValue = maxValue;
@@ -318,15 +318,7 @@ public class MinimaxAlgorithm {
 						generatedStates.add(successorState);	
 						successorFinalNodes.add(successorNode);
 						
-						System.out.println("--" + successorState.getRating() + ", "+ successorNode.getAction());
-						//State state = successorNode.getState();
-						//Partida partida = (Partida)state.getPartida();
-						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(0).getCasilla());
-						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(1).getCasilla());
-						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(2).getCasilla());
-						//System.out.println(partida.getTablero().getCasillero().getPiezas().get(3).getCasilla());
-						//System.out.println(successorNode.getDepth() + ": " + successorNode.getState().getRating());
-						//System.out.print(successorNode.getDepth() + ", ");
+						//System.out.println("--" + successorState.getRating() + ", "+ successorNode.getAction());
 					}
 				}
 			}

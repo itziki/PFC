@@ -48,9 +48,9 @@ public class EnterFinalSquare extends Action {
 		newState.setPartida(currentPartida);
 		newState.setPieza(piezaSelec);
 
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 9);
-		newState.setRating(y);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 9);*/
+		newState.setRating(3);
 		
 		return newState;
 	}

@@ -23,7 +23,6 @@ public class ReturnChipToHome extends Action {
 		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
 		int casilla = piezaSelec.getCasilla();
-		int nuevaCasilla = piezaSelec.getCasilla() + dice;
 		
 		//La ficha vuelve a la casa del principio
 		//currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla() + dice).getPiezas().get(0).setCasilla(101);
@@ -38,7 +37,7 @@ public class ReturnChipToHome extends Action {
 		//double x = piezaSelec.getRecorrido() * 0.16;
 		//double y = Math.abs(x - 9);
 		//tiene que ser la que tenga rating mas alto, porque si se puede hacer debe hacerse
-		newState.setRating(20);
+		newState.setRating(5);
 		
 		return newState;
 	}

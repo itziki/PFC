@@ -44,6 +44,7 @@ public class EatChip extends Action {
 		
 		//la ficha se mueve a la casilla
 		piezaSelec.setCasilla(nuevaCasilla);
+		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
 		currentPartida.getTablero().setCasillero(casillero);
 		
@@ -51,9 +52,9 @@ public class EatChip extends Action {
 		newState.setPartida(currentPartida);
 		
 		//generate rating
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 8);
-		newState.setRating(y);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 8);*/
+		newState.setRating(4);
 		
 		return newState;
 	}

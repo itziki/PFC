@@ -29,7 +29,7 @@ public class MainProgram
 		isCpu.add(0, true);
 		isCpu.add(1, true);
 		isCpu.add(2, true);
-		game.play(2, isCpu);
+		game.play(1, isCpu);
 		
 		//Seleccionar el numero de jugadores
 		/*

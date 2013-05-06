@@ -29,10 +29,11 @@ public class MoveChip extends Action {
 		Casillero casillero = currentPartida.getTablero().getCasillero();
 		
 		//La ficha se mueve hacia delante el número de casillas correspondiente
+
+		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		piezaSelec.setCasilla(nuevaCasilla);
-		piezaSelec.setRecorrido(piezaSelec.getCasilla() + dice);
 		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
-		casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
+		//casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
 		currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
 		
 		State newState = new State("move_chip");
@@ -40,9 +41,10 @@ public class MoveChip extends Action {
 		newState.setPieza(piezaSelec);
 		
 		//generate rating
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 10);
-		newState.setRating(6);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 10);*/
+		int recorrido = piezaSelec.getRecorrido();
+		newState.setRating(20/recorrido);
 		
 		return newState;
 	}
@@ -60,39 +62,86 @@ public class MoveChip extends Action {
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1); //la pieza que se va a mover
 		int casilla = piezaSelec.getCasilla();
 		
-		//Si la ficha no está en el pasillo final y Si la ficha no está en la casilla final	
-		switch (piezaSelec.getColor())
-		//miro si la ficha está en su pasillo
-		{
-		case 0:		
-			if(!(casilla >= 69 && casilla <= 76))
-			{
-				isApplicable = true;
-			}
-			break;
-		case 1:
-			if(!(casilla >= 77 && casilla <= 84))
-			{
-				isApplicable = true;
-			}
-			break;
-		case 2:
-			if(!(casilla >= 85 && casilla <= 92))
-			{
-				isApplicable = true;
-			}
-			break;
-		case 3:
-			if(!(casilla >= 93 && casilla <= 100))
-			{
-				isApplicable = true;
-			}
-			break;
-		default:
-				isApplicable = false;
-		};
 		
 		//Si la ficha está fuera de casa
+		if(casilla != 101) //la casilla 101 no existe, por lo que la ficha esta en casa sin salir aun
+		{//Si la ficha no está en el pasillo final y Si la ficha no está en la casilla final	
+			switch (piezaSelec.getColor())
+			//miro si la ficha está en su pasillo
+			{
+			case 0:		
+				if((casilla <= 69) && (casilla >= 1))
+				{
+					for (int i = casilla; i <= casilla + dice; i++)
+					{
+						//System.out.println(i);
+						if (!(casillas.get(i).getPiezas().size() == 2))
+						{
+							isApplicable = true;
+						}
+						else
+						{
+							isApplicable = false;
+						}
+					}
+				}
+				break;
+			case 1:
+				if((casilla <= 77) && (casilla >= 1))
+				{
+					for (int i = casilla; i <= casilla + dice; i++)
+					{
+						//System.out.println(i);
+						if (!(casillas.get(i).getPiezas().size() == 2))
+						{
+							isApplicable = true;
+						}
+						else
+						{
+							isApplicable = false;
+						}
+					}
+				}
+				break;
+			case 2:
+				if((casilla <= 85) && (casilla >= 1))
+				{
+					for (int i = casilla; i <= casilla + dice; i++)
+					{
+						//System.out.println(i);
+						if (!(casillas.get(i).getPiezas().size() == 2))
+						{
+							isApplicable = true;
+						}
+						else
+						{
+							isApplicable = false;
+						}
+					}
+				}
+				break;
+			case 3:
+				if((casilla <= 93) && (casilla >= 1))
+				{
+					for (int i = casilla; i <= casilla + dice; i++)
+					{
+						//System.out.println(i);
+						if (!(casillas.get(i).getPiezas().size() == 2))
+						{
+							isApplicable = true;
+						}
+						else
+						{
+							isApplicable = false;
+						}
+					}
+				}
+				break;
+			default:
+					isApplicable = false;
+			};
+		}
+		/*/Si la ficha está fuera de casa
 		if(piezaSelec.getCasilla() != 101) //la casilla 101 no existe, por lo que la ficha esta en casa sin salir aun
 		{
 			//isApplicable = true;
@@ -113,7 +162,7 @@ public class MoveChip extends Action {
 		else
 		{
 			isApplicable = false;
-		}
+		}*/
 		
 		//System.out.println(isApplicable+ ", " + casilla + ", " + piezaSelec.getColor());
 		return isApplicable;

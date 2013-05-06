@@ -70,9 +70,9 @@ public class GetOutOfHome extends Action {
 		piezaSelec.setRecorrido(1);
 		newState.setPieza(piezaSelec);
 		//generate rating
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 5);
-		newState.setRating(10);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 5);*/
+		newState.setRating(5);
 		
 		return newState;
 	}
@@ -87,7 +87,6 @@ public class GetOutOfHome extends Action {
 		Casillero casillero = tablero.getCasillero();
 		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
-		int casilla = piezaSelec.getCasilla();
 		
 		//Si la ficha está en casa
 		if(piezaSelec.getCasilla() == 101)

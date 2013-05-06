@@ -58,17 +58,18 @@ public class EnterFinalCorridor extends Action {
 		
 		//currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).getPiezas().get(0).setCasilla(piezaSelec.getCasilla() + dice);
 		piezaSelec.setCasilla(nuevaCasilla);
+		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
-		//currentPartida.getTablero().getCasillero().getCasillas().get(casilla).getPiezas().remove(0);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).getPiezas().remove(piezaSelec);
 		
 		State newState = new State("enter_final_corridor");
 		newState.setPartida(currentPartida);
 		newState.setPieza(piezaSelec);
 
 
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 7);
-		newState.setRating(y);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 7);*/
+		newState.setRating(4);
 		
 		return newState;
 	}
@@ -76,20 +77,49 @@ public class EnterFinalCorridor extends Action {
 	@Override
 	protected boolean isApplicable(State state, int dice)
 	
-	//si 63 < recorrido < 74
+	//si 64 < recorrido < 72
 	{
 		boolean isApplicable = false;
 		Partida currentPartida = state.getPartida();
 		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);//la pieza que se va a mover
-		//int casilla = piezaSelec.getCasilla() + dice;
+		int casilla = piezaSelec.getCasilla() + dice;
 		
-		//si con el movimiento entramos en el pasillo --> si 63 < recorrido < 74
+		//si con el movimiento entramos en el pasillo --> si 64 < recorrido < 72
 		int recorrido = piezaSelec.getRecorrido();
 		int recorridoMasDado = recorrido + dice;
-		if((recorridoMasDado > 63) && (recorridoMasDado < 74))
+		if((recorridoMasDado > 63) && (recorridoMasDado < 72))
 		{
-			isApplicable = true;
+			//si no esta ya en el pasillo
+			switch (piezaSelec.getColor())
+			{
+			case 0:		
+				if((casilla <= 69) && (casilla >= 1))
+				{
+					isApplicable = true;
+				}
+				break;
+			case 1:
+				if((casilla <= 77) && (casilla >= 1))
+				{
+					isApplicable = true;
+				}
+				break;
+			case 2:
+				if((casilla <= 85) && (casilla >= 1))
+				{
+					isApplicable = true;
+				}
+				break;
+			case 3:
+				if((casilla <= 93) && (casilla >= 1))
+				{
+					isApplicable = true;
+				}
+				break;
+			default:
+					isApplicable = false;
+			};
 		}
 		
 		/*switch (piezaSelec.getColor())

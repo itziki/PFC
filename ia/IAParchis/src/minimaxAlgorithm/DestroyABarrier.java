@@ -37,9 +37,9 @@ public class DestroyABarrier extends Action {
 		newState.setPartida(currentPartida);
 		newState.setPieza(piezaSelec);
 		
-		double x = piezaSelec.getRecorrido() * 0.16;
-		double y = Math.abs(x - 10);
-		newState.setRating(y);
+		/*double x = piezaSelec.getRecorrido() * 0.16;
+		double y = Math.abs(x - 10);*/
+		newState.setRating(5);
 		
 		return newState;
 	}
