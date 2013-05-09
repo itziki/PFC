@@ -27,9 +27,9 @@ public class MainProgram
 		GameClass game = new GameClass();
 		List<Boolean> isCpu = new ArrayList<Boolean>();
 		isCpu.add(0, true);
-		isCpu.add(1, true);
+		isCpu.add(1, false);
 		isCpu.add(2, true);
-		game.play(1, isCpu);
+		game.play(2, isCpu);
 		
 		//Seleccionar el numero de jugadores
 		/*

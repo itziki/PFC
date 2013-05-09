@@ -28,6 +28,7 @@ public class Dado {
 	{
 		Random randomGenerator = new Random();
 	    int dice = randomGenerator.nextInt(6) + 1;
+	    this.value = dice;
 		return dice;
 	}
 
