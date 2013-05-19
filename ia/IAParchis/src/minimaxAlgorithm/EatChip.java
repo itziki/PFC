@@ -38,6 +38,7 @@ public class EatChip extends Action {
 		casillero.getCasillas().get(nuevaCasilla).getPiezas().get(0).setCasilla(101);
 		casillero.getCasillas().get(nuevaCasilla).getPiezas().get(0).setRecorrido(0);
 		casillero.getCasillas().get(nuevaCasilla).getPiezas().remove(fichaComida);
+		casillero.getCasillas().get(nuevaCasilla).removeFicha();
 		
 		//System.out.println(currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).getPiezas().size());
 		//currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla() + dice).getPiezas().get(0).setCasilla(101);
@@ -46,6 +47,7 @@ public class EatChip extends Action {
 		piezaSelec.setCasilla(nuevaCasilla);
 		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		casillero.getCasillas().get(nuevaCasilla).addFicha();
 		currentPartida.getTablero().setCasillero(casillero);
 		
 		State newState = new State("eat_chip");

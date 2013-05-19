@@ -29,6 +29,10 @@ public class Dado {
 		Random randomGenerator = new Random();
 	    int dice = randomGenerator.nextInt(6) + 1;
 	    this.value = dice;
+	    if(this.value == 6)
+		{
+			this.consecutive6.add(value);
+		}
 		return dice;
 	}
 
@@ -48,11 +52,4 @@ public class Dado {
 		this.consecutive6 = givenValues;
 	}
 	
-	public void add6(int value)
-	{
-		if(value == 6)
-		{
-			this.consecutive6.add(value);
-		}
-	}
 }

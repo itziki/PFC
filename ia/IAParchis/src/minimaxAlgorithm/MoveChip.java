@@ -27,12 +27,29 @@ public class MoveChip extends Action {
 		Pieza piezaSelec = piezasJugador.get(numeroFicha - 1);
 		int nuevaCasilla = piezaSelec.getCasilla() + dice;
 		Casillero casillero = currentPartida.getTablero().getCasillero();
+		int colorJugador = piezaSelec.getColor();
+		
+		//si la ficha es de color azul, rojo o verde cuando pasa la casilla 68 tiene que ir a la 1, así que:
+		if((colorJugador == 1) || (colorJugador == 2) || (colorJugador == 3))
+		{
+			if(nuevaCasilla > 68)
+			{
+				int x = piezaSelec.getCasilla() + dice;
+				nuevaCasilla = x - 68;
+			}
+		}
+		
+		//borramos primero la ficha de la casilla en la que esta
+		casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
+		casillero.getCasillas().get(piezaSelec.getCasilla()).removeFicha();
 		
 		//La ficha se mueve hacia delante el número de casillas correspondiente
-
 		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		piezaSelec.setCasilla(nuevaCasilla);
-		casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		casillero.getCasillas().get(nuevaCasilla).getPiezas().add(piezaSelec);
+		casillero.getCasillas().get(nuevaCasilla).addFicha();
+
+		
 		//casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
 		currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
 		

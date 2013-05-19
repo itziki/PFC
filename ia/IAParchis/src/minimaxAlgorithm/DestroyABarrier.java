@@ -31,7 +31,9 @@ public class DestroyABarrier extends Action {
 		piezaSelec.setCasilla(piezaSelec.getCasilla() + dice);
 		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		currentPartida.getTablero().getCasillero().getCasillas().get(casilla + dice).addPiezaToCasilla(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casilla + dice).addFicha();
 		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).getPiezas().remove(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).removeFicha();
 		
 		State newState = new State("destroy_a_barrier");
 		newState.setPartida(currentPartida);

@@ -27,6 +27,7 @@ public class ReturnChipToHome extends Action {
 		//La ficha vuelve a la casa del principio
 		//currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla() + dice).getPiezas().get(0).setCasilla(101);
 		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).getPiezas().clear();
+		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).removeFicha();
 		piezaSelec.setCasilla(101);
 		piezaSelec.setRecorrido(0);
 		

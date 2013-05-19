@@ -4,14 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SelectPlayersGraphics extends JFrame implements MouseListener {
+import parchis.GameClass;
+
+public class SelectPlayersGraphics extends JFrame implements ActionListener {
 	private static JFrame frame = new JFrame();
     private static JPanel panel = new JPanel();
     
@@ -22,25 +29,19 @@ public class SelectPlayersGraphics extends JFrame implements MouseListener {
     
     private int numeroJugadores = 0;
     private boolean botonPulsado = false;
+    int players = 0;
         
-    public void draw()
+    public int draw()
     {
     	
-    	//jugadores2.setLayout(new BorderLayout(1, 2));
-    	/*
-    	
-    	lpane.setVisible(true);
-    	lpane.setOpaque(true);
-    	lpane.setBackground(Color.blue);
-    	
-    	JPanel buttonPanel = new JPanel();
-    	buttonPanel.add(jugadores2);
-    	lpane.add(buttonPanel, new Integer(1), 0);
-    	
-		frame.pack();
-		frame.setVisible(true); */
-    	
-    	frame.setPreferredSize(new Dimension(500, 200));
+    	JFrame frame = new JFrame();
+	    
+	    JButton jugadores2 = new JButton("2 Jugadores");
+	    JButton jugadores3 = new JButton("3 Jugadores");
+	    JButton jugadores4 = new JButton("4 Jugadores");
+	    JLabel setjugadores = new JLabel("Selecciona el numero de jugadores");
+	    
+	    frame.setPreferredSize(new Dimension(500, 200));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container pane = frame.getContentPane();
@@ -58,9 +59,17 @@ public class SelectPlayersGraphics extends JFrame implements MouseListener {
         jugadores3.setName("3");
         jugadores4.setName("4");
         
-        jugadores2.addMouseListener(this);
-        jugadores3.addMouseListener(this);
-        jugadores4.addMouseListener(this);
+        final List<Boolean> isCpu = new ArrayList<Boolean>();
+		isCpu.add(0, true);
+		isCpu.add(1, false);
+		isCpu.add(2, false);
+		isCpu.add(3, true);
+		
+		
+        
+        jugadores2.addActionListener(this);
+        jugadores3.addActionListener(this);
+        jugadores4.addActionListener(this);
         
         JPanel jugadores2Panel = new JPanel();
         jugadores2Panel.add(jugadores2);
@@ -77,51 +86,50 @@ public class SelectPlayersGraphics extends JFrame implements MouseListener {
         frame.setContentPane(pane);
         frame.pack();
         frame.setVisible(true);
-    }
-    
-    public int getNumeroJugadores()
-    {
-    	return numeroJugadores;
-    }
-
-	public boolean isBotonPulsado()
-	{
-		return botonPulsado;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("pulsado: " + e.getComponent().getName());
-		numeroJugadores = Integer.parseInt(e.getComponent().getName());		
-		botonPulsado = true;
-		System.out.println("variable cambiada: " + numeroJugadores + ", " + botonPulsado);
+        
+        try
+		{
+			synchronized(this)
+			{
+			      this.wait(); 
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
+        
+		return players;
 		
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		String button = e.getActionCommand();
+		System.out.println(button);
+		if(button.equals("2 Jugadores"))
+		{
+			players = 2;
+		}
+		else if (button.equals("3 Jugadores"))
+		{
+			players = 3;
+		}
+		else
+		{
+			players = 4;
+		}
 		
+		try
+		{
+			synchronized(this)
+			{
+			      this.notify(); 
+			}
+		}
+		catch(Exception ex)
+		{
+			
+		}
 	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-    
-    
-
 }

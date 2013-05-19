@@ -28,6 +28,7 @@ public class MakeABarrier extends Action {
 		
 		//Las fichas que no sean del color de la barrera no pueden pasar -> se meten las dos fichas en la casilla
 		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).addPiezaToCasilla(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).addFicha();
 		piezaSelec.setCasilla(casilla + dice);
 		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		

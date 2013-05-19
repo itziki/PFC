@@ -64,7 +64,9 @@ public class GetOutOfHome extends Action {
 			}
 		}
 		
-		currentPartida.getTablero().getCasillero().getCasillas().get(casillaSalida).setPiezas(piezas);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casillaSalida).getPiezas().add(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casillaSalida).addFicha();
+				
 		State newState = new State("get_out_of_home");
 		newState.setPartida(currentPartida);
 		piezaSelec.setRecorrido(1);
@@ -95,36 +97,29 @@ public class GetOutOfHome extends Action {
 			if(dice == 5)
 			{
 				//Si no tengo barrera de mi color en la casilla de salida
+				int piezasSalida = 0;
 				switch (piezaSelec.getColor())
 				{
-				case 0:		
-					if(!(casillero.getCasillas().get(5).getPiezas().size() == 2))
-					{
-						isApplicable = true;
-					}
-					
+				case 0:	
+					piezasSalida = casillero.getCasillas().get(5).getPiezas().size();
+					piezasSalida = casillero.getCasillas().get(5).getNumeroFichas();
 					break;
 				case 1:
-					if(!(casillero.getCasillas().get(22).getPiezas().size() == 2))
-					{
-						isApplicable = true;
-					}
+					piezasSalida = casillero.getCasillas().get(22).getPiezas().size();					
 					break;
 				case 2:
-					if(!(casillero.getCasillas().get(39).getPiezas().size() == 2))
-					{
-						isApplicable = true;
-					}
+					piezasSalida = casillero.getCasillas().get(39).getPiezas().size();					
 					break;
 				case 3:
-					if(!(casillero.getCasillas().get(56).getPiezas().size() == 2))
-					{
-						isApplicable = true;
-					}					
+					piezasSalida = casillero.getCasillas().get(56).getPiezas().size();										
 					break;
 				default:
 						isApplicable = false;
 				};
+				if(piezasSalida < 2)
+				{
+					isApplicable = true;
+				}
 			}
 		}
 		else

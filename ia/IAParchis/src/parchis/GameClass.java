@@ -2,6 +2,8 @@ package parchis;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -24,7 +26,7 @@ import javax.swing.JPanel;
 import minimaxAlgorithm.ParchisProblem;
 import formulation.State;
 
-public class GameClass implements ActionListener{
+public class GameClass extends JFrame implements ActionListener{
 	
 	private BufferedImage tableroImg = null;
 	private JPanel tableroJPanel = new JPanel();
@@ -89,6 +91,7 @@ public class GameClass implements ActionListener{
 		{
 			JPanel jpanel = new JPanel();
 	        JButton ficha = new JButton();
+	        //ficha.setEnabled(false);
 	        boolean isCpu = p.getTablero().getJugadores().get(piezas.get(i).getColor()).isCpu();
 	        Point posicion;
 	        if(piezas.get(i).getCasilla() == 101)
@@ -335,9 +338,10 @@ public class GameClass implements ActionListener{
         }
         frame.pack();
         frame.setVisible(true);
+        frame.repaint();
     }
     
-	//
+	//-----------------------------------------------------------------------------------------
 	public int nextPlayer(int player, int numberPlayers)
 	{
 		if (player == (numberPlayers - 1))
@@ -351,9 +355,144 @@ public class GameClass implements ActionListener{
 		}
 	}
 	
-	public void play(final int players, List<Boolean> cpu)
+	public void habilitarFichas(int dado, int player)
 	{
-		this.players = players;
+		List<Pieza> piezasJugador = problem.getCurrentState().getPartida().getTablero().getCasillero().getPiezasJugador(player);
+		for(int i = 0; i < piezasJugador.size(); i++)
+		{
+			if((piezasJugador.get(i).getCasilla() == 101) && (dado != 5))
+			{
+				//inhabilitar la ficha
+				for(int z = 0; z < fichasJPanel.size(); z++)
+				{
+					JPanel panel = fichasJPanel.get(z);
+					Component ficha = panel.getComponent(0);
+					int numeroFicha = Integer.parseInt(ficha.getName());
+					switch(piezasJugador.get(i).getColor())
+					{
+					case 0: 
+						if(numeroFicha == i)
+						{
+							ficha.setEnabled(false);
+						}
+						break;
+					case 1: 
+						if(numeroFicha == i)
+						{
+							ficha.setEnabled(false);
+						}
+						break;
+					case 2:
+						if(ficha.getBackground().equals(Color.red))
+						{
+							ficha.setEnabled(false);
+						}
+						break;
+						
+					case 3:
+						if(ficha.getBackground().equals(Color.green))
+						{
+							ficha.setEnabled(false);
+						}
+						break;
+					}						
+				}
+			}
+			else
+			{
+				//habilitar la ficha
+				for(int z = 0; z < fichasJPanel.size(); z++)
+				{
+					JPanel panel = fichasJPanel.get(z);
+					Component ficha = panel.getComponent(0);
+					int numeroFicha = Integer.parseInt(ficha.getName());
+					switch(piezasJugador.get(i).getColor())
+					{
+					case 0: 
+						if(numeroFicha == i)
+						{
+							ficha.setEnabled(true);
+						}
+						break;
+					case 1: 
+						if(numeroFicha == i)
+						{
+							ficha.setEnabled(true);
+						}
+						break;
+					case 2:
+						if(ficha.getBackground().equals(Color.red))
+						{
+							ficha.setEnabled(true);
+						}
+						break;
+						
+					case 3:
+						if(ficha.getBackground().equals(Color.green))
+						{
+							ficha.setEnabled(true);
+						}
+						break;
+					}		
+				}
+			}
+		}
+	}
+	
+	public void inhabilitarFichas()
+	{
+		for(int z = 0; z < fichasJPanel.size(); z++)
+		{
+			JPanel panel = fichasJPanel.get(z);
+			Component ficha = panel.getComponent(0);
+			ficha.setEnabled(false);
+		}
+	}
+	
+	public boolean puedeMover(int dado, int player)
+	{
+		boolean puedeMover = false;
+		List<Pieza> fichasJugador = problem.getCurrentState().getPartida().getTablero().getCasillero().getPiezasJugador(player);
+		for(int i = 0; i < fichasJugador.size(); i++)
+		{
+			if((fichasJugador.get(i).getCasilla() == 101) && (dado == 5))
+			{
+				//puede sacar ficha
+				puedeMover = true;
+			}
+			else if(fichasJugador.get(i).getCasilla() != 101)
+			{
+				puedeMover = true;
+			}
+		}
+		return puedeMover;
+	}
+	
+	public String getColorJugador(int numeroJugador)
+	{
+		String color = "";
+		switch(numeroJugador)
+		{
+		case 0: color = "Amarillo";
+		break;
+		case 1: color = "Azul";
+		break;
+		case 2: color = "Rojo";
+		break;
+		case 3: color = "Verde";
+		break;
+		}
+		return color;
+	}
+	
+	public void play(final int players, List<Boolean> cpu)
+	{			
+		//this.players = players;
+		 final List<Boolean> isCpu = new ArrayList<Boolean>();
+			isCpu.add(0, true);
+			isCpu.add(1, false);
+			isCpu.add(2, false);
+			isCpu.add(3, true);
 		try
 		{	
 			problem = ParchisProblem.getInstance(players, cpu);
@@ -365,52 +504,128 @@ public class GameClass implements ActionListener{
 			while(!problem.isFinalState(problem.getCurrentState()))
 			{
 				player = problem.getCurrentState().getPlayer();
+				String color = this.getColorJugador(player);
+				this.dadoLabel.setText(color);
+				this.draw();
 				Jugador jugador = problem.getCurrentState().getPartida().getTablero().getJugadores().get(player);
 				//if(player == 0)
 				if(jugador.isCpu())
-				{					
+				{			
 					dadoButton.setEnabled(false);
-					System.out.println("player: " + player);
+					try {
+					    Thread.sleep(2000);
+					} catch(InterruptedException ex) {
+					    Thread.currentThread().interrupt();
+					}
+					//System.out.println("player: " + player);
 					State bestMovement = problem.getBestMovement();
+					//System.out.println("dado:" + problem.getCurrentState().getPartida().getTablero().getDado().getValue());					
 					if(bestMovement != null)
 					{
-						int nextPlayer = nextPlayer(player, players);
-						bestMovement.setPlayer(nextPlayer);
-						bestMovement.getPartida().setColorJugador(nextPlayer);
+						//int nextPlayer = nextPlayer(player, players);
+						//bestMovement.setPlayer(nextPlayer);
+						//bestMovement.getPartida().setColorJugador(nextPlayer);
 						problem.setCurrentState(bestMovement);
+						this.setVariables(problem.getCurrentState().getPartida());
+						this.draw();
+						//si ha sacado 6 vuelve a tirar
+						if(problem.getCurrentState().getPartida().getTablero().getDado().getValue() != 6)
+						{
+							int nextPlayer = nextPlayer(player, players);
+							problem.getCurrentState().setPlayer(nextPlayer);
+							problem.getCurrentState().getPartida().setColorJugador(nextPlayer);
+							problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+						}
+						else
+						{
+							if(problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().size() > 2)
+							{
+								int nextPlayer = nextPlayer(player, players);
+								problem.getCurrentState().setPlayer(nextPlayer);
+								problem.getCurrentState().getPartida().setColorJugador(nextPlayer);
+								problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+							}
+						}
 					}
 					else
 					{
-						int nextPlayer = nextPlayer(player, players);
-						problem.getCurrentState().setPlayer(nextPlayer);
-						problem.getCurrentState().getPartida().setColorJugador(nextPlayer);
+						//si ha sacado 6 vuelve a tirar
+						if(problem.getCurrentState().getPartida().getTablero().getDado().getValue() != 6)
+						{
+							int nextPlayer = nextPlayer(player, players);
+							problem.getCurrentState().setPlayer(nextPlayer);
+							problem.getCurrentState().getPartida().setColorJugador(nextPlayer);
+							problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+						}
+						else
+						{
+							if(problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().size() > 2)
+							{
+								int nextPlayer = nextPlayer(player, players);
+								problem.getCurrentState().setPlayer(nextPlayer);
+								problem.getCurrentState().getPartida().setColorJugador(nextPlayer);
+								problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+							}
+						}
 					}
-					//this.setVariables(problem.getCurrentState().getPartida());
-					//this.draw();
 				}
-				else //si es un jugador real
+				else //SI ES JUGADOR REAL
 				{		
 
-					System.out.println("player: " + player);
+					//System.out.println("player: " + player);
 					dadoButton.setEnabled(true);
+					int thisPlayer = player;
 					try
-					{//hasta que tira el dado
+					{
 						synchronized(this)
 						{
-						      this.wait(); 
-						}
-						
-						this.setVariables(problem.getCurrentState().getPartida());
+							//hasta que tira el dado
+					        this.wait(); 
+						//}   
+				        // this.habilitarFichas(problem.getCurrentState().getPartida().getTablero().getDado().getValue(), player);
+				        this.setVariables(problem.getCurrentState().getPartida());
 						this.draw();
-					//hasta que mueve	
-						synchronized(this)
-						{
-						      this.wait(); 
-						}
+
+						boolean puedeMover = this.puedeMover(problem.getCurrentState().getPartida().getTablero().getDado().getValue(), player);
+						
+						//synchronized(this)
+						//{	
+							if(puedeMover)
+							{
+								//hasta que mueve
+								this.wait();
+							}
+						}	
 					}
 					catch(Exception e)
 					{
 						
+					}
+					/*
+					en plan chapucero: el syncronized 'resetea' las variables y cambia al jugador, así que inde-
+					 pendientemente de si saca 6 o no se le pasa el turno al jugador 0*/
+					problem.getCurrentState().getPartida().setColorJugador(thisPlayer);
+					problem.getCurrentState().setPlayer(thisPlayer);
+					//si saca 6 vuelve a tirar
+					if(problem.getCurrentState().getPartida().getTablero().getDado().getValue() != 6)
+					{
+						//System.out.println("cambio de jugador 1");
+						int nextPlayer = this.nextPlayer(player, players);		
+						problem.getCurrentState().setPlayer(nextPlayer);
+						problem.getCurrentState().getPartida().setColorJugador(nextPlayer);	
+						problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+					}
+					else
+					{
+						if(problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().size() > 2)
+						{
+							//System.out.println("cambio de jugador 2");
+							//System.out.println("consecutive 6:" + problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().size());
+							int nextPlayer = this.nextPlayer(player, players);		
+							problem.getCurrentState().setPlayer(nextPlayer);
+							problem.getCurrentState().getPartida().setColorJugador(nextPlayer);	
+							problem.getCurrentState().getPartida().getTablero().getDado().getConsecutive6().clear();
+						}
 					}
 				}
 
@@ -424,7 +639,7 @@ public class GameClass implements ActionListener{
 				    Thread.currentThread().interrupt();
 				}
 			}
-			System.out.println("game over");			
+			//System.out.println("game over");			
 		}
 		catch (Exception ex)
 		{
@@ -435,21 +650,141 @@ public class GameClass implements ActionListener{
 	
 	public void moverFicha(Pieza ficha, int numeroFicha)
 	{
-		System.out.println("moviendo ficha");
+		//System.out.println("moviendo ficha");
+		
+		Partida currentPartida = problem.getCurrentState().getPartida();
+		List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
+		Pieza piezaSelec = piezasJugador.get(numeroFicha);
+		Casillero casillero = currentPartida.getTablero().getCasillero();
+		int dado = problem.getCurrentState().getPartida().getTablero().getDado().getValue();
+		int recorrido = piezaSelec.getRecorrido();
+		int recorridoMasDado = recorrido + dado;
+		int colorJugador = ficha.getColor();
+		
+		//sacar la ficha de casa
 		if(ficha.getCasilla() == 101)
 		{
-			System.out.println("estas en casa");
+			int casillaSalida = 0;
+			//System.out.println("estas en casa");
+			if(dado == 5)
+			{
+				switch(colorJugador)
+				{
+				case 0:
+					casillaSalida = 5;
+					break;
+				case 1:
+					casillaSalida = 22;
+					break;
+				case 2:
+					casillaSalida = 39;
+					break;
+				case 3:
+					casillaSalida = 56;
+					break;
+				}
+				
+				piezaSelec.setRecorrido(1);
+				piezaSelec.setCasilla(casillaSalida);
+				casillero.getCasillas().get(casillaSalida).addPiezaToCasilla(piezaSelec);
+				//casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
+				currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
+				
+				State newState = new State("move_chip");
+				newState.setPartida(currentPartida);
+				newState.setPieza(piezaSelec);
+				problem.setCurrentState(newState);
+			}
 		}
+		//entrar en el pasillo final
+		else if((recorridoMasDado > 63) && (recorridoMasDado < 72))
+		{
+			int casilla = ficha.getCasilla();
+			//System.out.println("casilla: " + casilla + ", recorrido:" + ficha.getRecorrido());
+			int casillasHastaSeguro = 0;
+			int casillasDentroDePasillo = 0;
+			int nuevaCasilla = 0;
+			switch (piezaSelec.getColor())
+			{//si no esta ya en el pasillo
+			case 0:		
+				if((casilla <= 69) && (casilla >= 1))
+				{
+					casillasHastaSeguro = 68 - casilla;
+					casillasDentroDePasillo = dado - casillasHastaSeguro;
+					nuevaCasilla = 68 + casillasDentroDePasillo;
+					break;
+				}
+				else if((casilla >= 69) && (casilla <= 76))
+				{
+					nuevaCasilla = casilla + dado;
+				}
+				break;
+			case 1:
+				if(((casilla <= 68) && (casilla >= 22)) || ((casilla <= 17) && (casilla >= 1)))
+				//if(!(casilla >= 77) && !(casilla <= 84))
+				{
+					casillasHastaSeguro = 17 - casilla;
+					casillasDentroDePasillo = dado - casillasHastaSeguro;
+					nuevaCasilla = 76 + casillasDentroDePasillo;
+					break;
+				}
+				else if((casilla >= 77) && (casilla <= 84))
+				{
+					nuevaCasilla = casilla + dado;
+				}
+				break;
+			case 2:
+				if(((casilla <= 68) && (casilla >= 39)) || ((casilla <= 34) && (casilla >= 1)))
+				{
+					casillasHastaSeguro = 33 - casilla;
+					casillasDentroDePasillo = dado - casillasHastaSeguro;
+					nuevaCasilla = 84 + casillasDentroDePasillo;
+					break;
+				}
+				else if((casilla >= 85) && (casilla <= 92))
+				{
+					nuevaCasilla = casilla + dado;
+				}
+				break;
+			case 3:
+				if(((casilla <= 68) && (casilla >= 56)) || ((casilla <= 51) && (casilla >= 1)))
+				{
+					casillasHastaSeguro = 51 - casilla;
+					casillasDentroDePasillo = dado - casillasHastaSeguro;
+					nuevaCasilla = 92 + casillasDentroDePasillo;
+					break;
+				}
+				else if((casilla >= 93) && (casilla <= 100))
+				{
+					nuevaCasilla = casilla + dado;
+				}
+			};
+			piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dado);
+			piezaSelec.setCasilla(nuevaCasilla);
+			casillero.getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+			casillero.getCasillas().get(casilla).getPiezas().remove(piezaSelec);
+			//casillero.getCasillas().get(piezaSelec.getCasilla()).getPiezas().remove(piezaSelec);
+			currentPartida.getTablero().setCasillero(casillero); //el state cambiado, falta devolverlo
+			
+			State newState = new State("move_chip");
+			newState.setPartida(currentPartida);
+			newState.setPieza(piezaSelec);
+			problem.setCurrentState(newState);
+		}
+		//mover la ficha
 		else
 		{
-			Partida currentPartida = problem.getCurrentState().getPartida();
-			List<Pieza> piezasJugador = currentPartida.getTablero().getCasillero().getPiezasJugador(currentPartida.getColorJugador());
-			Pieza piezaSelec = piezasJugador.get(numeroFicha);
-			int dado = problem.getCurrentState().getPartida().getTablero().getDado().getValue();
-			int nuevaCasilla = piezaSelec.getCasilla() + dado;
-			Casillero casillero = currentPartida.getTablero().getCasillero();
+			int nuevaCasilla =  piezaSelec.getCasilla() + dado;
 			
-			//La ficha se mueve hacia delante el número de casillas correspondiente
+			//si la ficha es de color azul, rojo o verde cuando pasa la casilla 68 tiene que ir a la 1, así que:
+			if((colorJugador == 1) || (colorJugador == 2) || (colorJugador == 3))
+			{
+				if(nuevaCasilla > 68)
+				{
+					int x = piezaSelec.getCasilla() + dado;
+					nuevaCasilla = x - 68;
+				}
+			}	
 	
 			piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dado);
 			piezaSelec.setCasilla(nuevaCasilla);
@@ -466,14 +801,12 @@ public class GameClass implements ActionListener{
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println(e.getActionCommand());
 		String button = e.getActionCommand();
 		
 		if(button.equals("Tira"))
 		{
 			dadoButton.setEnabled(false);
 			problem.getCurrentState().getPartida().getTablero().getDado().throwDice();
-			System.out.println(problem.getCurrentState().getPartida().getTablero().getDado().getValue());
 			this.draw();
 		}
 		else
@@ -481,10 +814,9 @@ public class GameClass implements ActionListener{
 			int numeroFicha = Integer.parseInt(e.getActionCommand());
 			Pieza ficha = problem.getCurrentState().getPartida().getTablero().getCasillero().getPiezasJugador(player).get(numeroFicha);
 			this.moverFicha(ficha, numeroFicha);
-			int nextPlayer = this.nextPlayer(player, players);		
-			problem.getCurrentState().setPlayer(nextPlayer);
-			problem.getCurrentState().getPartida().setColorJugador(nextPlayer);	
+			//this.inhabilitarFichas();
 		}
+		
 		try
 		{
 			synchronized(this)
@@ -497,5 +829,4 @@ public class GameClass implements ActionListener{
 			
 		}
 	}
-
 }

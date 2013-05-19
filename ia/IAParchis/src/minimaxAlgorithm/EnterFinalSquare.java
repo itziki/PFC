@@ -42,6 +42,8 @@ public class EnterFinalSquare extends Action {
 		};
 		
 		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addFicha();
+		currentPartida.getTablero().getCasillero().getCasillas().get(piezaSelec.getCasilla()).removeFicha();
 		piezaSelec.setCasilla(nuevaCasilla);
 		
 		State newState = new State("enter_final_square");

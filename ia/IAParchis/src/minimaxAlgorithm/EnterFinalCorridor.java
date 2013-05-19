@@ -60,7 +60,9 @@ public class EnterFinalCorridor extends Action {
 		piezaSelec.setCasilla(nuevaCasilla);
 		piezaSelec.setRecorrido(piezaSelec.getRecorrido() + dice);
 		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addPiezaToCasilla(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(nuevaCasilla).addFicha();
 		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).getPiezas().remove(piezaSelec);
+		currentPartida.getTablero().getCasillero().getCasillas().get(casilla).removeFicha();
 		
 		State newState = new State("enter_final_corridor");
 		newState.setPartida(currentPartida);
@@ -99,20 +101,20 @@ public class EnterFinalCorridor extends Action {
 					isApplicable = true;
 				}
 				break;
-			case 1:
-				if((casilla <= 77) && (casilla >= 1))
+			case 1:				
+				if(((casilla <= 68) && (casilla >= 22)) || ((casilla <= 17) && (casilla >= 1)))
 				{
 					isApplicable = true;
 				}
 				break;
 			case 2:
-				if((casilla <= 85) && (casilla >= 1))
+				if(((casilla <= 68) && (casilla >= 39)) || ((casilla <= 34) && (casilla >= 1)))
 				{
 					isApplicable = true;
 				}
 				break;
 			case 3:
-				if((casilla <= 93) && (casilla >= 1))
+				if(((casilla <= 68) && (casilla >= 56)) || ((casilla <= 51) && (casilla >= 1)))
 				{
 					isApplicable = true;
 				}

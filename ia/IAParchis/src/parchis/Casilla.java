@@ -40,7 +40,15 @@ public class Casilla {
 		this.piezas.add(pieza);
 	}
 	
+	public void addFicha()
+	{
+		this.numeroFichas = this.numeroFichas + 1;
+	}
 	
+	public void removeFicha()
+	{
+		this.numeroFichas = this.numeroFichas - 1;
+	}
 
 	public Point getPosicion() {
 		return posicion;
